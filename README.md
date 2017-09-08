@@ -2,8 +2,8 @@
 
 Yleisiä linkkejä:
 
-* http://lahdeero.users.cs.helsinki.fi/tsoha/
-* https://github.com/lahdeero/Tsoha-Bootstrap/blob/master/doc/dokumentaatio.pdf
+* [Sovelluksen osoite](http://lahdeero.users.cs.helsinki.fi/tsoha/)
+* [Dokumentaatio](https://github.com/lahdeero/Tsoha-Bootstrap/blob/master/doc/dokumentaatio.pdf)
 
 ## Työn aihe
 
