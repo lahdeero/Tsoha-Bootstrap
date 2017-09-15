@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block content %}
+  <h1>manitKotiin vedonlyöjät</h1>
+
+  <table class="table table-striped table-bordered">
+    <thead>
+      <tr>
+        <th>Nimi</th>
+        <th>Saldo</th>
+        <th>Status</th>
+        <th></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <!-- Listataan vedonlyöjät tähän -->
+      <tr>
+        <td><a href="#">Unto Uhkapelaaja</a></td>
+        <td>Pakkasta näytttää</td>
+        <td><label class="label label-danger">Uhkapelaaja kovimmasta päästä</label></td>
+      </tr>
+    </tbody>
+  </table>
+{% endblock %}

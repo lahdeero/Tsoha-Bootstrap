@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block content %}
+  <h1>manitKotiin lajit</h1>
+
+  <p>
+    <a href="#" class="btn btn-success">Lisää veto</a>
+  </p>
+
+  <table class="table table-striped table-bordered">
+    <thead>
+      <tr>
+        <th>Kotijoukkue</th>
+        <th>Vierasjoukkue</th>
+        <th>Vedon tyyppi</th>
+        <th>Status</th>
+        <th>Sulkeutumispäivä</th>
+        <th></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <!-- Listataan vedot tähän -->
+      <tr>
+        <td><a href="#">Kempleeen koijaus</a></td>
+        <td>Keikkaus OY</td>
+        <td>1X2</td>
+        <td><label class="label label-danger">Auki</label></td>
+        <td>20.19.2017</td>
+        <th><a class="btn btn-default btn-sm" href="#">Muokkaa</a></th>
+      </tr>
+    </tbody>
+  </table>
+{% endblock %}

@@ -16,6 +16,7 @@
 
   // Määritetään sovelluksen juuripolulle vakio BASE_PATH
   define('BASE_PATH', '/' . $base_folder);
+  define('BET_LIST', '/' . '/suunnitelmat/bet_list.html');
 
   // Luodaan uusi tai palautetaan olemassaoleva sessio
   if(session_id() == '') {
