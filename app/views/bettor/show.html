@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block content %}
+  <div class="alert alert-success">
+    {{message}}
+  </div>
+  <h1>{{vedonlyoja.nimi}}</h1>
+  <p>
+    <button class="btn btn-danger">Poista</button> <a href="{{base_path}}/match/{{vedonlyoja.id}}/delete" class="btn btn-default">Muokkaa</a>
+  </p>
+  <ul>
+    <li><strong>Id:</strong> {{vedonlyoja.id}}</li>
+    <li><strong>Nimi:</strong> {{vedonlyoja.nimi}}</li>
+    <li><strong>Saldo:</strong> {{vedonlyoja.saldo}}</li>
+  </ul>
+  <p>
+  </p>
+{% endblock %}

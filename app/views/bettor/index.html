@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block content %}
+  <h1>manitKotiin vedonlyöjät</h1>
+
+  <table class="table table-striped table-bordered">
+    <thead>
+      <tr>
+        <th>Nimi</th>
+        <th>Saldo</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      {% for vedonlyoja in vedonlyojat %}
+        <tr>
+          <td><a href="{{base_path}}/bettor/{{vedonlyoja.id}}">{{vedonlyoja.nimi}}</td>
+          <td>{{vedonlyoja.saldo}}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}

@@ -1,18 +1,18 @@
 {% extends "base.html" %}
 {% block content %}
+  <div class="alert alert-success">
+    {{message}}
+  </div>
   <h1>{{kohde.nimi}}</h1>
-  <!-- Painikkeet tähän -->
   <p>
-    <button class="btn btn-danger">Poista</button> <a href="#" class="btn btn-default">Muokkaa</a>
+    <button class="btn btn-danger">Poista</button> <a href="{{base_path}}/match/{{kohde.id}}/delete" class="btn btn-default">Muokkaa</a>
   </p>
-  <!-- Tiedot tulee listana tähän -->
   <ul>
     <li><strong>Id:</strong> {{kohde.id}}</li>
     <li><strong>Nimi:</strong> {{kohde.nimi}}</li>
     <li><strong>Tyyppi:</strong> {{kohde.tyyppi}}</li>
     <li><strong>Sulkeutumisaika:</strong> {{kohde.sulkeutumisaika}}</li>
   </ul>
-  <!-- Kuvaus tulee tähän -->
   <p>
   </p>
 {% endblock %}

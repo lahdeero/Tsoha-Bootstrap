@@ -22,6 +22,11 @@
       View::make('match/new.html');
     }
 
+    public static function match_delete($id) {
+      Kohde::delete($id);
+      Redirect::to('/match/', array('message' => 'Kohde on poistettu tietokannasta!'));
+    }
+
     public static function match_store(){
       // POST-pyynnön muuttujat sijaitsevat $_POST nimisessä assosiaatiolistassa
       $params = $_POST;

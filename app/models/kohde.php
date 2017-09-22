@@ -53,4 +53,9 @@ class Kohde extends BaseModel {
       $row = $query->fetch();
       $this->id = $row['id'];
   }
+
+  public function delete($id) {
+    $query = DB::connection()->prepare('DELETE FROM Kohde WHERE id = :id LIMIT 1');
+    $query->execute(array('id' => $id));
+  }
 }

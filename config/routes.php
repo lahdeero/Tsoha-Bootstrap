@@ -24,6 +24,10 @@
 		MatchController::match_show($id);
 	});
 
+	$routes->get('/match/:id/delete', function($id) {
+		MatchController::match_delete($id);
+	});
+
 	$routes->get('/bet', function() {
 	  BetController::bet_list();
 	});
@@ -32,10 +36,10 @@
 	});
 
 	$routes->get('/bettor', function() {
-	  HelloWorldController::bettor_list();
+	  BettorController::bettor_list();
 	});
-	$routes->get('/bettor/1', function() {
-	  HelloWorldController::bettor_show();
+	$routes->get('/bettor/:id', function($id) {
+	  BettorController::bettor_show($id);
 	});
 
 	$routes->get('/admin', function() {
