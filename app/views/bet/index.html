@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block content %}
+  <h1>manitKotiin vedot</h1>
+
+  <table class="table table-striped table-bordered">
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>Merkki</th>
+        <th>Summa</th>
+        <th>Kohde id</th>
+        <th>Vedonlyoja id</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      {% for veto in vedot %}
+        <tr>
+          <td>{{veto.id}}</td>
+          <td>{{veto.merkki}}</td>
+          <td>{{veto.summa}}</td>
+          <td>{{veto.kohde_id}}</td>
+          <td>{{veto.vedonlyoja_id}}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}
