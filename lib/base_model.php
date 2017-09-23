@@ -15,12 +15,38 @@
       }
     }
 
+    public function validate_nimi(){
+      $errors = array();
+      if($this->nimi == '' || $this->nimi == null){
+        $errors[] = 'Nimi ei saa olla tyhjä!';
+      }
+      if(strlen($this->nimi) < 3){
+        $errors[] = 'Nimen pituuden tulee olla vähintään kolme merkkiä!';
+      }
+
+      return $errors;
+    }
+    public function validate_tyyppi(){
+      $errors = array();
+      if($this->tyyppi == '' || $this->tyyppi == null){
+        $errors[] = 'Tyyppi ei saa olla tyhjä!';
+      }
+      if(strlen($this->tyyppi) < 3){
+        $errors[] = 'Tyypin pituuden tulee olla vähintään kolme merkkiä!';
+      }
+
+      return $errors;
+    }
+
     public function errors(){
       // Lisätään $errors muuttujaan kaikki virheilmoitukset taulukkona
       $errors = array();
+      $validator_errors = array();
 
       foreach($this->validators as $validator){
         // Kutsu validointimetodia tässä ja lisää sen palauttamat virheet errors-taulukkoon
+        $validator_errors = $this->{$validator}();
+        $errors = array_merge($errors, $validator_errors);
       }
 
       return $errors;

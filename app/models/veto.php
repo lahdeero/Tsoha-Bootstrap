@@ -2,7 +2,7 @@
 <?php
 
 class Veto extends BaseModel {
-  public $id, $merkki, $summa, $kohde_id, $vedonlyoja_id;
+  public $id, $merkki, $panos, $palautus, $kohde_id, $vedonlyoja_id;
 
   public function __construct($attributes){
     parent::__construct($attributes);
@@ -17,7 +17,8 @@ class Veto extends BaseModel {
       $kohde = new Kohde(array(
       'id' => $row['id'],
       'merkki' => $row['merkki'],
-      'summa' => $row['summa'],
+      'panos' => $row['panos'],
+      'palautus' => $row['palautus'],
       'kohde_id' => $row['kohde_id'],
       'vedonlyoja_id' => $row['vedonlyoja_id']
     ));
@@ -26,7 +27,7 @@ class Veto extends BaseModel {
     }
 
     return null;
-    }
+  }
 
   public static function all() {
     $query = DB::connection()->prepare('SELECT * FROM Veto');
@@ -40,7 +41,8 @@ class Veto extends BaseModel {
       $vedot[] = new Veto(array(
         'id' => $row['id'],
         'merkki' => $row['merkki'],
-        'summa' => $row['summa'],
+        'panos' => $row['panos'],
+        'palautus' => $row['palautus'],
         'kohde_id' => $row['kohde_id'],
         'vedonlyoja_id' => $row['vedonlyoja_id']
       ));

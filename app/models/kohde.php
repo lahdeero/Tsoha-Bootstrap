@@ -1,4 +1,3 @@
-
 <?php
 
 class Kohde extends BaseModel {
@@ -6,6 +5,7 @@ class Kohde extends BaseModel {
 
   public function __construct($attributes){
     parent::__construct($attributes);
+    $this->validators = array('validate_nimi', 'validate_tyyppi');
   }
 
   public static function find($id){
@@ -18,7 +18,8 @@ class Kohde extends BaseModel {
       'id' => $row['id'],
       'nimi' => $row['nimi'],
       'tyyppi' => $row['tyyppi'],
-      'sulkeutumisaika' => $row['sulkeutumisaika']
+      'sulkeutumisaika' => $row['sulkeutumisaika'],
+      'tulos' => $row['tulos']
     ));
 
     return $kohde;
@@ -40,7 +41,28 @@ class Kohde extends BaseModel {
         'id' => $row['id'],
         'nimi' => $row['nimi'],
         'tyyppi' => $row['tyyppi'],
-        'sulkeutumisaika' => $row['sulkeutumisaika']
+        'sulkeutumisaika' => $row['sulkeutumisaika'],
+        'tulos' => $row['tulos']
+      ));
+    }
+
+    return $kohteet;
+  }
+
+  public static function newest($howmany) {
+    $query = DB::connection()->prepare('SELECT * FROM Kohde ORDER BY id DESC LIMIT :howmany');
+    $query->execute(array('howmany' => $howmany));
+
+    $rows = $query->fetchAll();
+    $kohteet = array();
+
+    foreach($rows as $row){
+      $kohteet[] = new Kohde(array(
+        'id' => $row['id'],
+        'nimi' => $row['nimi'],
+        'tyyppi' => $row['tyyppi'],
+        'sulkeutumisaika' => $row['sulkeutumisaika'],
+        'tulos' => $row['tulos']
       ));
     }
 
@@ -54,8 +76,8 @@ class Kohde extends BaseModel {
       $this->id = $row['id'];
   }
 
-  public function delete($id) {
-    $query = DB::connection()->prepare('DELETE FROM Kohde WHERE id = :id LIMIT 1');
+  public static function destroy($id) {
+    $query = DB::connection()->prepare('DELETE FROM Kohde WHERE id = :id');
     $query->execute(array('id' => $id));
   }
 }

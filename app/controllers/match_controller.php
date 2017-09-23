@@ -1,47 +1,54 @@
 <?php
   class MatchController extends BaseController{
 
-    public static function index(){
-      // make-metodi renderöi app/views-kansiossa sijaitsevia tiedostoja
-   	  View::make('suunnitelmat/etusivu.html');
-    }
-
-    public static function match_list(){
+    public static function list(){
       $kohteet = Kohde::all();
 
       View::make('match/index.html', array('kohteet' => $kohteet));
     }
 
-    public static function match_show($id){
+    public static function show($id){
       $kohde = Kohde::find($id);
 
-      View::make('match/match_show.html', array('kohde' => $kohde));
+      View::make('match/show.html', array('kohde' => $kohde));
     }
 
-    public static function match_create() {
+    public static function create() {
       View::make('match/new.html');
     }
 
-    public static function match_delete($id) {
-      Kohde::delete($id);
-      Redirect::to('/match/', array('message' => 'Kohde on poistettu tietokannasta!'));
+    public static function destroy($id) {
+      $kohde = new Kohde(array('id' => $id));
+
+      $kohde->destroy($id);
+
+      Redirect::to('/match', array('message' => 'Kohde on poistettu tietokannasta!'));
     }
 
-    public static function match_store(){
+    public static function store(){
       // POST-pyynnön muuttujat sijaitsevat $_POST nimisessä assosiaatiolistassa
       $params = $_POST;
       // Alustetaan uusi Kohde-luokan olion käyttäjän syöttämillä arvoilla
-      $kohde = new Kohde(array(
+      $attributes = array(
         'nimi' => $params['nimi'],
         'tyyppi' => $params['tyyppi'],
         'sulkeutumisaika' => $params['sulkeutumisaika']
-      ));
+      );
+
+      //tarkistetaan kohde virheiltä
+      $kohde = new Kohde($attributes);
+      $errors = $kohde->errors();
 
       // Kutsutaan alustamamme olion save metodia, joka tallentaa olion tietokantaan
-      $kohde->save();
+      if (count($errors) == 0){
+        $kohde->save();
+        Redirect::to('/match/' . $kohde->id, array('message' => 'Kohde on lisätty tietokantaan!'));
+      } else{
+        View::make('match/new.html', array('errors' => $errors, 'attributes' => $attributes));
+      }
 
       // Ohjataan käyttäjä lisäyksen jälkeen pelin esittelysivulle
-      Redirect::to('/match/' . $kohde->id, array('message' => 'Kohde on lisätty tietokantaan!'));
+
     }
   }
 ?>

@@ -29,6 +29,10 @@
       View::make('suunnitelmat/competition_list.html');
     }
 
+    public static function hello() {
+      View::make('helloworld.html');
+    }
+
     public static function sandbox(){
       $ekapeli = Kohde::find(1);
       $kohteet = Kohde::all();

@@ -1,8 +1,5 @@
 {% extends "base.html" %}
 {% block content %}
-<div class="alert alert-success">
-  {{message}}
-</div>
   <h1>Kohteet</h1>
 
   <p>
@@ -16,7 +13,7 @@
         <th>Nimi</th>
         <th>Kohteen tyyppi</th>
         <th>Sulkeutumisaika</th>
-        <th></th>
+        <th>Tulos</th>
       </tr>
     </thead>
 
@@ -27,6 +24,7 @@
           <td><a href="{{base_path}}/match/{{kohde.id}}">{{kohde.nimi}}</td>
           <td>{{kohde.tyyppi}}</td>
           <td>{{kohde.sulkeutumisaika}}</td>
+          <td>{{kohde.tulos}}</td>
         </tr>
       {% endfor %}
     </tbody>

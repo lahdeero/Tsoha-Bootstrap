@@ -1,7 +1,7 @@
 <?php
 
 	$routes->get('/', function() {
-		MatchController::index();
+		FrontPageController::index();
 	});
 
 	$routes->get('/login', function() {
@@ -9,29 +9,29 @@
 	});
 
 	$routes->get('/match', function() {
-	  MatchController::match_list();
+	  MatchController::list();
 	});
 
 	$routes->post('/match', function() {
-		MatchController::match_store();
+		MatchController::store();
 	});
 
 	$routes->get('/match/new', function() {
-		MatchController::match_create();
+		MatchController::create();
 	});
 
 	$routes->get('/match/:id', function($id) {
-		MatchController::match_show($id);
+		MatchController::show($id);
 	});
 
-	$routes->get('/match/:id/delete', function($id) {
-		MatchController::match_delete($id);
+	$routes->post('/match/:id/destroy', function($id) {
+		MatchController::destroy($id);
 	});
 
 	$routes->get('/bet', function() {
 	  BetController::bet_list();
 	});
-	$routes->get('/bet/1', function() {
+	$routes->get('/bet/:id', function() {
 	  BetController::bet_show();
 	});
 
@@ -43,7 +43,7 @@
 	});
 
 	$routes->get('/admin', function() {
-	  HelloWorldController::admin_list();
+	  AdminController::index();
 	});
 
 	$routes->get('/competition', function() {
@@ -56,4 +56,8 @@
 
 	$routes->get('/hiekkalaatikko', function() {
 		HelloWorldController::sandbox();
+	});
+
+	$routes->get('/hello', function() {
+		HelloWorldController::hello();
 	});

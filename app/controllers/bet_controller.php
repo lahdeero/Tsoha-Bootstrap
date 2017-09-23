@@ -7,11 +7,11 @@
     }
 
     public static function bet_show(){
-      View::make('bet/bet_show.html');
+      View::make('bet/show.html');
     }
 
     public static function bet_modify(){
-      View::make('bet/bet_modify.html');
+      View::make('bet/modify.html');
     }
   }
 ?>
