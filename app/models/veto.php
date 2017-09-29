@@ -2,7 +2,7 @@
 <?php
 
 class Veto extends BaseModel {
-  public $id, $merkki, $panos, $palautus, $kohde_id, $vedonlyoja_id;
+  public $id, $nimi, $pelaaja, $merkki, $panos, $palautus, $kohde_id, $vedonlyoja_id;
 
   public function __construct($attributes){
     parent::__construct($attributes);
@@ -51,7 +51,28 @@ class Veto extends BaseModel {
     return $vedot;
   }
 
-  public static function bets($id) {
+  public static function newest($howmany) {
+    $query = DB::connection()->prepare('SELECT kohde.nimi as nimi, Vedonlyoja.nimi as pelaaja, Veto.merkki as merkki, Veto.panos as panos FROM Veto
+      LEFT JOIN Kohde ON Veto.kohde_id = Kohde.id LEFT JOIN Vedonlyoja ON Veto.vedonlyoja_id = Vedonlyoja.id
+      ORDER BY Veto.id DESC LIMIT :howmany');
+    $query->execute(array('howmany' => $howmany));
+
+    $rows = $query->fetchAll();
+    $vedot = array();
+
+    foreach($rows as $row){
+      $vedot[] = new Veto(array(
+        'nimi' => $row['nimi'],
+        'pelaaja' => $row['pelaaja'],
+        'merkki' => $row['merkki'],
+        'panos' => $row['panos']
+      ));
+    }
+
+    return $vedot;
+  }
+
+  public static function user_bets($id) {
     $query = DB::connection()->prepare('SELECT * FROM Veto WHERE vedonlyoja_id = :id');
     $query->execute(array('id' => $id));
 

@@ -30,7 +30,7 @@ CREATE TABLE Vedonlyoja(
 
 CREATE TABLE Veto(
 	id SERIAL PRIMARY KEY,
-	merkki integer,
+	merkki varchar(3),
 	panos decimal,
 	palautus decimal,
 	kohde_id integer,

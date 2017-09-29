@@ -59,4 +59,30 @@
     </tbody>
   </table>
 
+  <p>
+  Uusimmat vedot:
+  </p>
+
+  <table class="table table-striped table-bordered">
+    <thead>
+      <tr>
+        <th>Kohde</th>
+        <th>Vedonlyoja</th>
+        <th>Merkki</th>
+        <th>Panos</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      {% for veto in vedot %}
+        <tr>
+          <td><a href="{{base_path}}/match/{{veto.kohde_id}}">{{veto.nimi}}</td>
+          <td>{{veto.pelaaja}}</td>
+          <td>{{veto.merkki}}</td>
+          <td>{{veto.panos}}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
 {% endblock %}
