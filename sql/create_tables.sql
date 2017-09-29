@@ -22,7 +22,7 @@ CREATE TABLE Kohde(
 
 CREATE TABLE Vedonlyoja(
 	id SERIAL PRIMARY KEY,
-	nimi varchar(20) NOT NULL,
+	nimi varchar(20) NOT NULL UNIQUE,
 	salasana varchar(20),
 	saldo decimal,
 	rekisteroitymispaiva DATE

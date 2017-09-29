@@ -13,5 +13,6 @@
     public static function bet_modify(){
       View::make('bet/modify.html');
     }
+    
   }
 ?>

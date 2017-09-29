@@ -2,7 +2,7 @@
 {% block content %}
   <h1>{{vedonlyoja.nimi}}</h1>
   <p>
-    <button class="btn btn-danger">Poista</button> <a href="{{base_path}}/match/{{vedonlyoja.id}}/delete" class="btn btn-default">Muokkaa</a>
+      <button class="btn btn-danger">Poista tunnus</button> <a href="{{base_path}}/bettor/{{vedonlyoja.id}}/delete" class="btn btn-default">Muokkaa</a>
   </p>
   <ul>
     <li><strong>Id:</strong> {{vedonlyoja.id}}</li>
@@ -10,6 +10,32 @@
     <li><strong>Saldo:</strong> {{vedonlyoja.saldo}}</li>
     <li><strong>Rekisteröitymispäivä:</strong> {{vedonlyoja.rekisteroitymispaiva}}</li>
   </ul>
+  <h2>Omat vedot</h2>
   <p>
+    <table class="table table-striped table-bordered">
+      <thead>
+        <tr>
+          <th>Id</th>
+          <th>Merkki</th>
+          <th>Panos</th>
+          <th>Palautus</th>
+          <th>Kohde id</th>
+          <th>Vedonlyoja id</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        {% for veto in vedot %}
+          <tr>
+            <td>{{veto.id}}</td>
+            <td>{{veto.merkki}}</td>
+            <td>{{veto.panos}}</td>
+            <td>{{veto.palautus}}</td>
+            <td>{{veto.kohde_id}}</td>
+            <td>{{veto.vedonlyoja_id}}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
   </p>
 {% endblock %}

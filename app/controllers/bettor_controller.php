@@ -9,8 +9,10 @@
 
     public static function bettor_show($id){
       $vedonlyoja = Vedonlyoja::find($id);
+      $vedot = Veto::bets($id);
 
-      View::make('bettor/show.html', array('vedonlyoja' => $vedonlyoja));
+      View::make('bettor/show.html', array('vedonlyoja' => $vedonlyoja, 'vedot' => $vedot));
+      //View::make('etusivu.html', array('vedonlyojat' => $vedonlyojat, 'kohteet' => $kohteet));
     }
   }
 ?>

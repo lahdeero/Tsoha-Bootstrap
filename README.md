@@ -10,3 +10,5 @@ Yleisiä linkkejä:
 ## Työn aihe
 
 Vedonlyöntiä leaderboardilla.
+
+Ohjaaja voi kirjautua Ohjaaja / ohja123.

@@ -50,4 +50,28 @@ class Veto extends BaseModel {
 
     return $vedot;
   }
+
+  public static function bets($id) {
+    $query = DB::connection()->prepare('SELECT * FROM Veto WHERE vedonlyoja_id = :id');
+    $query->execute(array('id' => $id));
+
+    $rows = $query->fetchAll();
+    $vedot = array();
+
+    if($rows){
+      foreach($rows as $row){
+        $vedot[] = new Veto(array(
+          'id' => $row['id'],
+          'merkki' => $row['merkki'],
+          'panos' => $row['panos'],
+          'palautus' => $row['palautus'],
+          'kohde_id' => $row['kohde_id'],
+          'vedonlyoja_id' => $row['vedonlyoja_id']
+        ));
+      }
+      return $vedot;
+    }
+
+      return null;
+  }
 }
