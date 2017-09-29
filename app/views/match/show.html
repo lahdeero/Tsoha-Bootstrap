@@ -1,14 +1,11 @@
 {% extends "base.html" %}
 {% block content %}
-<div class="alert alert-success">
-  {{message}}
-</div>
   <h1>{{kohde.nimi}}</h1>
   <p>
     <form method="post" action="{{base_path}}/match/{{kohde.id}}/destroy" style="display: inline-block;">
       <button type="submit" class="btn btn-danger">Poista</button>
     </form>
-    <a href="#" class="btn btn-default">Muokkaa</a>
+    <a href="{{base_path}}/match/{{kohde.id}}/edit" class="btn btn-default">Muokkaa</a>
   </p>
   <ul>
     <li><strong>Id:</strong> {{kohde.id}}</li>

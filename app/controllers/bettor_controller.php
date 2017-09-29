@@ -1,5 +1,6 @@
 <?php
   class BettorController extends BaseController{
+
     public static function bettor_list(){
       $vedonlyojat = Vedonlyoja::all();
 
@@ -11,6 +12,5 @@
 
       View::make('bettor/show.html', array('vedonlyoja' => $vedonlyoja));
     }
-
   }
 ?>

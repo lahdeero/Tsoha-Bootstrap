@@ -15,7 +15,7 @@ CREATE TABLE Kohde(
 	nimi varchar(50),
 	tyyppi varchar(50),
 	sulkeutumisaika TIMESTAMP,
-	tulos integer,
+	tulos varchar(8),
 	kilpailu_id integer,
 	FOREIGN KEY(kilpailu_id) REFERENCES Kilpailu(id)
 );
@@ -25,7 +25,7 @@ CREATE TABLE Vedonlyoja(
 	nimi varchar(20) NOT NULL,
 	salasana varchar(20),
 	saldo decimal,
-	rekpvm DATE
+	rekisteroitymispaiva DATE
 );
 
 CREATE TABLE Veto(

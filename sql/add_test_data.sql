@@ -5,9 +5,9 @@ INSERT INTO Kilpailu(nimi, laji_id) VALUES ('Vesalan suopallon sm', 1);
 
 INSERT INTO Yllapitaja (nimi, salasana) VALUES ('admin', 'password');
 
-INSERT INTO Vedonlyoja (nimi, salasana, saldo, rekisterointipaiva) VALUES ('Eero', 'eero123', 10.2, '2017-09-20');
-INSERT INTO Vedonlyoja (nimi, salasana, saldo, rekisterointipaiva) VALUES ('Matti', 'matti123', 15.2, '2017-09-23');
-INSERT INTO Vedonlyoja (nimi, salasana, saldo, rekisterointipaiva) VALUES ('Sirkka', 'sirkka123', 100.2, '2017-09-23');
+INSERT INTO Vedonlyoja (nimi, salasana, saldo, rekisteroitymispaiva) VALUES ('Eero', 'eero123', 10.2, '2017-09-20');
+INSERT INTO Vedonlyoja (nimi, salasana, saldo, rekisteroitymispaiva) VALUES ('Matti', 'matti123', 15.2, '2017-09-23');
+INSERT INTO Vedonlyoja (nimi, salasana, saldo, rekisteroitymispaiva) VALUES ('Sirkka', 'sirkka123', 100.2, '2017-09-23');
 
 INSERT INTO Kohde (nimi, tyyppi, sulkeutumisaika, kilpailu_id) VALUES ('Kuopolan koijaus - Keikkaus OU', '1X2', '2017-09-24 20:00:00', 1);
 INSERT INTO Kohde (nimi, tyyppi, sulkeutumisaika, kilpailu_id) VALUES ('Pekkalan parhaat - Siippolan veijarit', '1X2', '2017-09-25 20:00:00', 1);

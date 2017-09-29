@@ -5,6 +5,12 @@
     <h1>Tervetuloa vedonlyöntisivustolle</h1>
   </div>
 
+{% if message %}
+  <div class="alert alert-success">
+    {{message}}
+  </div>
+{% endif %}
+
   <p>
 	Uusimmat kohteet:
   </p>
@@ -47,7 +53,7 @@
         <tr>
           <td><a href="{{base_path}}/bettor/{{vedonlyoja.id}}">{{vedonlyoja.nimi}}</td>
           <td>{{vedonlyoja.saldo}}</td>
-          <td>{{vedonlyoja.rekpvm}}</td>
+          <td>{{vedonlyoja.rekisteroitymispaiva}}</td>
         </tr>
       {% endfor %}
     </tbody>

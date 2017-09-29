@@ -17,14 +17,6 @@
       View::make('match/new.html');
     }
 
-    public static function destroy($id) {
-      $kohde = new Kohde(array('id' => $id));
-
-      $kohde->destroy($id);
-
-      Redirect::to('/match', array('message' => 'Kohde on poistettu tietokannasta!'));
-    }
-
     public static function store(){
       // POST-pyynnön muuttujat sijaitsevat $_POST nimisessä assosiaatiolistassa
       $params = $_POST;
@@ -50,5 +42,41 @@
       // Ohjataan käyttäjä lisäyksen jälkeen pelin esittelysivulle
 
     }
+    public static function edit($id) {
+      $kohde = Kohde::find($id);
+      View::make('match/edit.html', array('kohde' => $kohde));
+    }
+
+    public static function update($id) {
+      $params = $_POST;
+
+      $attributes = array(
+        'id' => $id,
+        'nimi' => $params['nimi'],
+        'tyyppi' => $params['tyyppi'],
+        'sulkeutumisaika' => $params['sulkeutumisaika'],
+        'tulos' => $params['tulos']
+      );
+
+      $kohde = new Kohde($attributes);
+      $errors = $kohde->errors();
+
+      if (count($errors) > 0) {
+        View::make('kohde/edit.html', array('errors' => $errors, 'attributes' => $attributes));
+      } else {
+        $kohde->update($id);
+
+        Redirect::to('/match/' . $kohde->id, array('message' => 'Kohdetta on muokattu onnistuneesti'));
+      }
+    }
+
+    public static function destroy($id) {
+      $kohde = new Kohde(array('id' => $id));
+
+      $kohde->destroy($id);
+
+      Redirect::to('/match', array('message' => 'Kohde on poistettu tietokannasta!'));
+    }
+
   }
 ?>

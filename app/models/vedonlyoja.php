@@ -2,14 +2,14 @@
 <?php
 
 class Vedonlyoja extends BaseModel {
-  public $id, $nimi, $saldo, $rekpvm;
+  public $id, $nimi, $saldo, $rekisteroitymispaiva;
 
   public function __construct($attributes){
     parent::__construct($attributes);
   }
 
   public static function find($id){
-    $query = DB::connection()->prepare('SELECT id,nimi,saldo,rekpvm FROM Vedonlyoja WHERE id = :id LIMIT 1');
+    $query = DB::connection()->prepare('SELECT id,nimi,saldo,rekisteroitymispaiva FROM Vedonlyoja WHERE id = :id LIMIT 1');
     $query->execute(array('id' => $id));
     $row = $query->fetch();
 
@@ -18,7 +18,7 @@ class Vedonlyoja extends BaseModel {
       'id' => $row['id'],
       'nimi' => $row['nimi'],
       'saldo' => $row['saldo'],
-      'rekpvm' => row['rekpvm']
+      'rekisteroitymispaiva' => $row['rekisteroitymispaiva']
     ));
 
     return $vedonlyoja;
@@ -28,7 +28,7 @@ class Vedonlyoja extends BaseModel {
   }
 
   public static function all() {
-    $query = DB::connection()->prepare('SELECT id, nimi, saldo, rekpvm FROM Vedonlyoja');
+    $query = DB::connection()->prepare('SELECT id, nimi, saldo, rekisteroitymispaiva FROM Vedonlyoja');
 
     $query->execute();
 
@@ -40,7 +40,7 @@ class Vedonlyoja extends BaseModel {
         'id' => $row['id'],
         'nimi' => $row['nimi'],
         'saldo' => $row['saldo'],
-        'rekpvm' => $row['rekpvm']
+        'rekisteroitymispaiva' => $row['rekisteroitymispaiva']
       ));
     }
 
@@ -48,7 +48,7 @@ class Vedonlyoja extends BaseModel {
   }
 
   public static function toplist($howmany) {
-    $query = DB::connection()->prepare('SELECT nimi,saldo,rekpvm FROM Vedonlyoja ORDER BY saldo DESC LIMIT :howmany');
+    $query = DB::connection()->prepare('SELECT nimi,saldo,rekisteroitymispaiva FROM Vedonlyoja ORDER BY saldo DESC LIMIT :howmany');
     $query->execute(array('howmany' => $howmany));
 
     $rows = $query->fetchAll();
@@ -58,7 +58,7 @@ class Vedonlyoja extends BaseModel {
       $vedonlyojat[] = new Vedonlyoja(array(
         'nimi' => $row['nimi'],
         'saldo' => $row['saldo'],
-        'rekpvm' => $row['rekpvm']
+        'rekisteroitymispaiva' => $row['rekisteroitymispaiva']
       ));
     }
 

@@ -1,7 +1,7 @@
 <?php
 
 class Kohde extends BaseModel {
-  public $id, $nimi, $tyyppi, $sulkeutumisaika;
+  public $id, $nimi, $tyyppi, $sulkeutumisaika, $tulos, $kilpailu_id;
 
   public function __construct($attributes){
     parent::__construct($attributes);
@@ -79,5 +79,10 @@ class Kohde extends BaseModel {
   public static function destroy($id) {
     $query = DB::connection()->prepare('DELETE FROM Kohde WHERE id = :id');
     $query->execute(array('id' => $id));
+  }
+
+  public function update($id) {
+    $query = DB::connection()->prepare('UPDATE Kohde SET nimi = :nimi, tyyppi = :tyyppi, sulkeutumisaika = :sulkeutumisaika, tulos = :tulos WHERE id = :id');
+    $query->execute(array('nimi' => $this->nimi, 'tyyppi' => $this->tyyppi, 'sulkeutumisaika' => $this->sulkeutumisaika, 'tulos' => $this->tulos, 'id' => $id));
   }
 }

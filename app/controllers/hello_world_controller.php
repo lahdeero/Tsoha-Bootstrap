@@ -1,10 +1,6 @@
 <?php
   class HelloWorldController extends BaseController{
 
-    public static function login(){
-      View::make('suunnitelmat/login.html');
-    }
-
     public static function bettor_list(){
       View::make('suunnitelmat/bettor_list.html');
     }

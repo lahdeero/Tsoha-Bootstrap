@@ -5,9 +5,14 @@
 	});
 
 	$routes->get('/login', function() {
-	  HelloWorldController::login();
+	  UserController::login();
 	});
-
+	$routes->post('/login', function(){
+	  UserController::handle_login();
+	});
+	$routes->get('/logout', function() {
+		UserController::logout();
+	});
 	$routes->get('/match', function() {
 	  MatchController::list();
 	});
@@ -22,6 +27,14 @@
 
 	$routes->get('/match/:id', function($id) {
 		MatchController::show($id);
+	});
+
+	$routes->get('/match/:id/edit', function($id) {
+		MatchController::edit($id);
+	});
+
+	$routes->post('/match/:id/edit', function($id) {
+		MatchController::update($id);
 	});
 
 	$routes->post('/match/:id/destroy', function($id) {
