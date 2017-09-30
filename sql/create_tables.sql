@@ -25,7 +25,8 @@ CREATE TABLE Vedonlyoja(
 	nimi varchar(20) NOT NULL UNIQUE,
 	salasana varchar(20),
 	saldo decimal,
-	rekisteroitymispaiva DATE
+	rekisteroitymispaiva DATE,
+	yllapitaja integer DEFAULT 0
 );
 
 CREATE TABLE Veto(
@@ -39,8 +40,10 @@ CREATE TABLE Veto(
 	FOREIGN KEY(vedonlyoja_id) REFERENCES Vedonlyoja(id)
 );
 
-CREATE TABLE Yllapitaja(
+CREATE TABLE Ehdotus(
 	id SERIAL PRIMARY KEY,
-	nimi varchar(20),
-	salasana varchar(20)
-);
+	nimi varchar(20) NOT NULL,
+	selvennys varchar(500),
+	kilpailu_id integer,
+	FOREIGN KEY(kilpailu_id) REFERENCES Kilpailu(id)
+)

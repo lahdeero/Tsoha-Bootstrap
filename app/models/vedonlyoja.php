@@ -2,14 +2,14 @@
 <?php
 
 class Vedonlyoja extends BaseModel {
-  public $id, $nimi, $saldo, $rekisteroitymispaiva;
+  public $id, $nimi, $saldo, $rekisteroitymispaiva, $yllapitaja;
 
   public function __construct($attributes){
     parent::__construct($attributes);
   }
 
   public static function find($id){
-    $query = DB::connection()->prepare('SELECT id,nimi,saldo,rekisteroitymispaiva FROM Vedonlyoja WHERE id = :id LIMIT 1');
+    $query = DB::connection()->prepare('SELECT * FROM Vedonlyoja WHERE id = :id LIMIT 1');
     $query->execute(array('id' => $id));
     $row = $query->fetch();
 
@@ -18,7 +18,8 @@ class Vedonlyoja extends BaseModel {
       'id' => $row['id'],
       'nimi' => $row['nimi'],
       'saldo' => $row['saldo'],
-      'rekisteroitymispaiva' => $row['rekisteroitymispaiva']
+      'rekisteroitymispaiva' => $row['rekisteroitymispaiva'],
+      'yllapitaja' => $row['yllapitaja']
     ));
 
     return $vedonlyoja;

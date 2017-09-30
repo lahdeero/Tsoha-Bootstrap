@@ -12,8 +12,35 @@
     <li><strong>Nimi:</strong> {{kohde.nimi}}</li>
     <li><strong>Tyyppi:</strong> {{kohde.tyyppi}}</li>
     <li><strong>Sulkeutumisaika:</strong> {{kohde.sulkeutumisaika}}</li>
-    <li><strong>Valinnat:</strong><button type="button">1</button><button type="button">X</button><button type="button">2</button></li>
   </ul>
+  <br>
+  {% if user_logged_in %}
   <p>
+    <form method="post" action="{{base_path}}/bet" id="asetaVeto">
+      <div class="form-group">
+        <label>Merkki</label>
+        <select name="merkki" form="asetaVeto">
+          <option value="1">1</option>
+          <option value="X">X</option>
+          <option value="2">2</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Panos</label>
+        <input type="text" name="panos" maxlength="5" size="5" class="form-control" >
+      </div>
+
+      <div class="form-group">
+        <input type="hidden" name="kohde_id" value="{{kohde.id}}" class="form-control" >
+      </div>
+
+      <div class="form-group">
+        <button type="submit" class="btn btn-primary">Aseta veto</button>
+      </div>
+    </form>
+
+    {% endif %}
+
   </p>
 {% endblock %}

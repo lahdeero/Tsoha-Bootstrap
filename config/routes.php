@@ -42,10 +42,13 @@
 	});
 
 	$routes->get('/bet', function() {
-	  BetController::bet_list();
+	  BetController::list();
 	});
-	$routes->get('/bet/:id', function() {
-	  BetController::bet_show();
+	$routes->get('/bet/:id', function($id) {
+	  BetController::show($id);
+	});
+	$routes->post('/bet', function() {
+		BetController::store();
 	});
 
 	$routes->get('/bettor', function() {
@@ -60,11 +63,15 @@
 	});
 
 	$routes->get('/competition', function() {
-	  HelloWorldController::competition_list();
+	  CompetitionController::list();
 	});
 
 	$routes->get('/sport', function() {
-	  HelloWorldController::sport_list();
+	  SportController::list();
+	});
+
+	$routes->get('/suggestion', function() {
+	  SuggestionController::list();
 	});
 
 	$routes->get('/hiekkalaatikko', function() {

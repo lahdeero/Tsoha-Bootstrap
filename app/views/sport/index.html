@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block content %}
+  <h1>Lajit</h1>
+
+  <table class="table table-striped table-bordered">
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>Nimi</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      {% for laji in lajit %}
+        <tr>
+          <td>{{laji.id}}</td>
+          <td>{{laji.nimi}}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}

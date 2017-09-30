@@ -17,7 +17,7 @@
     <tbody>
       {% for veto in vedot %}
         <tr>
-          <td>{{veto.id}}</td>
+          <td><a href="{{base_path}}/bet/{{veto.id}}">{{veto.id}}</td>
           <td>{{veto.merkki}}</td>
           <td>{{veto.panos}}</td>
           <td>{{veto.palautus}}</td>
