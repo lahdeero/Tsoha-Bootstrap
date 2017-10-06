@@ -9,10 +9,9 @@
 
     public static function all() {
       $query = DB::connection()->prepare('SELECT * FROM Laji');
-
       $query->execute();
-
       $rows = $query->fetchAll();
+
       $lajit = array();
 
       foreach($rows as $row){

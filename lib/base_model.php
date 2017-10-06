@@ -26,17 +26,6 @@
 
       return $errors;
     }
-    public function validate_tyyppi(){
-      $errors = array();
-      if($this->tyyppi == '' || $this->tyyppi == null){
-        $errors[] = 'Tyyppi ei saa olla tyhjä!';
-      }
-      if(strlen($this->tyyppi) < 3){
-        $errors[] = 'Tyypin pituuden tulee olla vähintään kolme merkkiä!';
-      }
-
-      return $errors;
-    }
 
     public function errors(){
       // Lisätään $errors muuttujaan kaikki virheilmoitukset taulukkona

@@ -1,7 +1,7 @@
 <?php
 
   class Ehdotus extends BaseModel {
-    public $id, $nimi, $selvennys, $kilpailu_id;
+    public $id, $nimi, $selvennys, $laji_id;
 
     public function __construct($attributes){
       parent::__construct($attributes);
@@ -21,7 +21,7 @@
           'id' => $row['id'],
           'nimi' => $row['nimi'],
           'selvennys' => $row['selvennys'],
-          'kilpailu_id' => $row['kilpailu_id']
+          'laji_id' => $row['laji_id']
         ));
       }
 

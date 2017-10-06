@@ -16,8 +16,9 @@
     <table class="table table-striped table-bordered">
       <thead>
         <tr>
+          <th>Veto</td>
           <th>Kohde</th>
-          <th>Merkki</th>
+          <th>Valinta</th>
           <th>Panos</th>
           <th>Palautus</th>
         </tr>
@@ -26,8 +27,9 @@
       <tbody>
         {% for veto in vedot %}
           <tr>
-            <td>{{veto.nimi}}</td>
-            <td>{{veto.merkki}}</td>
+            <td><a href="{{base_path}}/bet/{{veto.id}}">{{veto.id}}</a></td>
+            <td><a href="{{base_path}}/match/{{veto.kohde_id}}">{{veto.kohde_nimi}}</a></td>
+            <td>{{veto.valinta_nimi}}</td>
             <td>{{veto.panos}}</td>
             <td>{{veto.palautus}}</td>
           </tr>

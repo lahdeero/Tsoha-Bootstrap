@@ -12,17 +12,18 @@
     <li><strong>Nimi:</strong> {{kohde.nimi}}</li>
     <li><strong>Tyyppi:</strong> {{kohde.tyyppi}}</li>
     <li><strong>Sulkeutumisaika:</strong> {{kohde.sulkeutumisaika}}</li>
+    <li><strong>Laji:</strong> {{kohde.laji_nimi}}</li>
   </ul>
   <br>
   {% if user_logged_in %}
   <p>
     <form method="post" action="{{base_path}}/bet" id="asetaVeto">
       <div class="form-group">
-        <label>Merkki</label>
-        <select name="merkki" form="asetaVeto">
-          <option value="1">1</option>
-          <option value="X">X</option>
-          <option value="2">2</option>
+        <label>Valinta</label>
+        <select name="valinta_id" form="asetaVeto">
+          {% for valinta in valinnat %}
+            <option value="{{valinta.id}}">{{valinta.nimi}}</option>
+          {% endfor %}
         </select>
       </div>
 

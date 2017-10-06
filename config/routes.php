@@ -52,18 +52,14 @@
 	});
 
 	$routes->get('/bettor', function() {
-	  BettorController::bettor_list();
+	  BettorController::index();
 	});
 	$routes->get('/bettor/:id', function($id) {
-	  BettorController::bettor_show($id);
+	  BettorController::show($id);
 	});
 
 	$routes->get('/admin', function() {
 	  AdminController::index();
-	});
-
-	$routes->get('/competition', function() {
-	  CompetitionController::list();
 	});
 
 	$routes->get('/sport', function() {

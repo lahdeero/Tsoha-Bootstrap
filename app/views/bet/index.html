@@ -6,23 +6,21 @@
     <thead>
       <tr>
         <th>Id</th>
-        <th>Merkki</th>
+        <th>Kohde</th>
         <th>Panos</th>
-        <th>Palautus</th>
-        <th>Kohde id</th>
-        <th>Vedonlyoja id</th>
+        <th>Valinta</th>
+        <th>Vedonlyöjä</th>
       </tr>
     </thead>
 
     <tbody>
       {% for veto in vedot %}
         <tr>
-          <td><a href="{{base_path}}/bet/{{veto.id}}">{{veto.id}}</td>
-          <td>{{veto.merkki}}</td>
+          <td>{{veto.id}}</td>
+          <td><a href="{{base_path}}/match/{{veto.kohde_id}}">{{veto.kohde_nimi}}</a></td>
           <td>{{veto.panos}}</td>
-          <td>{{veto.palautus}}</td>
-          <td>{{veto.kohde_id}}</td>
-          <td>{{veto.vedonlyoja_id}}</td>
+          <td>{{veto.valinta_nimi}}</td>
+          <td><a href="{{base_path}}/bettor/{{veto.vedonlyoja_id}}">{{veto.vedonlyoja_nimi}}</a></td>
         </tr>
       {% endfor %}
     </tbody>

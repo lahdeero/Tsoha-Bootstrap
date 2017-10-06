@@ -9,12 +9,15 @@
 
     public static function show($id){
       $kohde = Kohde::find($id);
+      $valinnat = Valinta::find($id);
 
-      View::make('match/show.html', array('kohde' => $kohde));
+      View::make('match/show.html', array('kohde' => $kohde, 'valinnat' => $valinnat));
     }
 
     public static function create() {
-      View::make('match/new.html');
+      $lajit = Laji::all();
+
+      View::make('match/new.html', array('lajit' => $lajit));
     }
 
     public static function store(){
@@ -24,6 +27,7 @@
       $attributes = array(
         'nimi' => $params['nimi'],
         'tyyppi' => $params['tyyppi'],
+        'laji_id' => $params['laji_id'],
         'sulkeutumisaika' => $params['sulkeutumisaika']
       );
 

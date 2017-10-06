@@ -1,15 +1,16 @@
 <?php
 
 class Kohde extends BaseModel {
-  public $id, $nimi, $tyyppi, $sulkeutumisaika, $tulos, $kilpailu_id;
+  public $id, $nimi, $tyyppi, $sulkeutumisaika, $tulos, $laji_id, $laji_nimi;
 
   public function __construct($attributes){
     parent::__construct($attributes);
-    $this->validators = array('validate_nimi', 'validate_tyyppi');
+    $this->validators = array('validate_nimi');
   }
 
   public static function find($id){
-    $query = DB::connection()->prepare('SELECT * FROM Kohde WHERE id = :id LIMIT 1');
+    $query = DB::connection()->prepare('SELECT kohde.id, kohde.nimi, kohde.tyyppi, kohde.sulkeutumisaika, kohde.tulos,
+      laji.nimi as laji_nimi FROM Kohde LEFT JOIN Laji ON Kohde.laji_id = Laji.id WHERE id = :id LIMIT 1');
     $query->execute(array('id' => $id));
     $row = $query->fetch();
 
@@ -19,7 +20,8 @@ class Kohde extends BaseModel {
       'nimi' => $row['nimi'],
       'tyyppi' => $row['tyyppi'],
       'sulkeutumisaika' => $row['sulkeutumisaika'],
-      'tulos' => $row['tulos']
+      'tulos' => $row['tulos'],
+      'laji_nimi' => $row['laji_nimi']
     ));
 
     return $kohde;
@@ -42,7 +44,8 @@ class Kohde extends BaseModel {
         'nimi' => $row['nimi'],
         'tyyppi' => $row['tyyppi'],
         'sulkeutumisaika' => $row['sulkeutumisaika'],
-        'tulos' => $row['tulos']
+        'tulos' => $row['tulos'],
+        'laji_id' => $row['laji_id']
       ));
     }
 
@@ -70,8 +73,8 @@ class Kohde extends BaseModel {
   }
 
   public function save() {
-      $query = DB::connection()->prepare('INSERT INTO Kohde (nimi, tyyppi, sulkeutumisaika) VALUES (:nimi, :tyyppi, :sulkeutumisaika) RETURNING id');
-      $query->execute(array('nimi' => $this->nimi, 'tyyppi' => $this->tyyppi, 'sulkeutumisaika' => $this->sulkeutumisaika));
+      $query = DB::connection()->prepare('INSERT INTO Kohde (nimi, tyyppi, sulkeutumisaika, laji_id) VALUES (:nimi, :tyyppi, :sulkeutumisaika, :laji_id) RETURNING id');
+      $query->execute(array('nimi' => $this->nimi, 'tyyppi' => $this->tyyppi, 'sulkeutumisaika' => $this->sulkeutumisaika, 'laji_id' => $this->laji_id));
       $row = $query->fetch();
       $this->id = $row['id'];
   }

@@ -40,12 +40,11 @@
           <ul class="nav navbar-nav">
             <!-- Navigaation linkit -->
             <li><a href="{{base_path}}/match">Kohteet</a></li>
-            <li><a href="{{base_path}}/bettor">Vedonlyojat</a></li>
-            <li><a href="{{base_path}}/bet">Vedot</a></li>
-            <li><a href="{{base_path}}/admin">Ylläpitäjät</a></li>
             <li><a href="{{base_path}}/sport">Lajit</a></li>
-            <li><a href="{{base_path}}/competition">Kilpailut</a></li>
             {% if user_logged_in %}
+              <li><a href="{{base_path}}/bet">Vedot</a></li>
+              <li><a href="{{base_path}}/bettor">Vedonlyojat</a></li>
+              <li><a href="{{base_path}}/admin">Ylläpitäjät</a></li>
               <li><a href="{{base_path}}/suggestion">Ehdotettuja</a></li>
               <li><a href="{{base_path}}/bettor/{{user_logged_in.id}}">Oma sivu</a></li>
               <li><a href="{{base_path}}/logout">Kirjaudu ulos</a></li>

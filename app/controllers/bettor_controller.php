@@ -1,13 +1,15 @@
 <?php
   class BettorController extends BaseController{
 
-    public static function bettor_list(){
+    public static function index(){
+      self::check_logged_in();
       $vedonlyojat = Vedonlyoja::all();
 
       View::make('bettor/index.html', array('vedonlyojat' => $vedonlyojat));
     }
 
-    public static function bettor_show($id){
+    public static function show($id){
+      self::check_logged_in();
       $vedonlyoja = Vedonlyoja::find($id);
       $vedot = Veto::user_bets($id);
 

@@ -1,28 +1,32 @@
 <?php
   class BetController extends BaseController{
     public static function list(){
+      self::check_logged_in();
       $vedot = Veto::all();
 
       View::make('bet/index.html', array('vedot' => $vedot));
     }
 
     public static function show($id){
+      self::check_logged_in();
       $veto = Veto::find($id);
 
       View::make('bet/show.html', array('veto' => $veto));
     }
 
     public static function modify(){
+      self::check_logged_in();
       View::make('bet/modify.html');
     }
 
     public static function store(){
+      self::check_logged_in();
       $params = $_POST;
 
       $attributes = array(
-        'merkki' => $params['merkki'],
         'panos' => $params['panos'],
         'kohde_id' => $params['kohde_id'],
+        'valinta_id' => $params['valinta_id'],
         'vedonlyoja_id' => $_SESSION['user']
       );
 
