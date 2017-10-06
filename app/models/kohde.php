@@ -10,7 +10,7 @@ class Kohde extends BaseModel {
 
   public static function find($id){
     $query = DB::connection()->prepare('SELECT kohde.id, kohde.nimi, kohde.tyyppi, kohde.sulkeutumisaika, kohde.tulos,
-      laji.nimi as laji_nimi FROM Kohde LEFT JOIN Laji ON Kohde.laji_id = Laji.id WHERE id = :id LIMIT 1');
+      laji.nimi as laji_nimi FROM Kohde LEFT JOIN Laji ON Kohde.laji_id = Laji.id WHERE kohde.id = :id LIMIT 1');
     $query->execute(array('id' => $id));
     $row = $query->fetch();
 
@@ -77,6 +77,11 @@ class Kohde extends BaseModel {
       $query->execute(array('nimi' => $this->nimi, 'tyyppi' => $this->tyyppi, 'sulkeutumisaika' => $this->sulkeutumisaika, 'laji_id' => $this->laji_id));
       $row = $query->fetch();
       $this->id = $row['id'];
+  }
+
+  public static function destroy_options($id) {
+    $query = DB::connection()->prepare('DELETE FROM Valinta WHERE kohde_id = :id');
+    $query->execute(array('id' => $id));
   }
 
   public static function destroy($id) {

@@ -9,8 +9,7 @@ CREATE TABLE Kohde(
 	tyyppi varchar(50),
 	sulkeutumisaika varchar(50),
 	tulos varchar(8),
-	laji_id integer,
-	FOREIGN KEY(laji_id) REFERENCES Laji(id)
+	laji_id INTEGER REFERENCES Laji(id)
 );
 
 CREATE TABLE Vedonlyoja(
@@ -36,7 +35,7 @@ CREATE TABLE Veto(
 	kohde_id integer,
 	vedonlyoja_id integer,
 	valinta_id integer,
-	FOREIGN KEY(kohde_id) REFERENCES Kohde(id),
+	FOREIGN KEY(kohde_id) REFERENCES Kohde(id) ON DELETE CASCADE,
 	FOREIGN KEY(vedonlyoja_id) REFERENCES Vedonlyoja(id),
 	FOREIGN KEY(valinta_id) REFERENCES Valinta(id)
 );

@@ -15,6 +15,7 @@
     }
 
     public static function create() {
+      self::check_logged_in();
       $lajit = Laji::all();
 
       View::make('match/new.html', array('lajit' => $lajit));
@@ -47,11 +48,13 @@
 
     }
     public static function edit($id) {
+      self::check_logged_in();
       $kohde = Kohde::find($id);
       View::make('match/edit.html', array('kohde' => $kohde));
     }
 
     public static function update($id) {
+      self::check_logged_in();
       $params = $_POST;
 
       $attributes = array(
@@ -75,8 +78,11 @@
     }
 
     public static function destroy($id) {
+      self::check_logged_in();
+
       $kohde = new Kohde(array('id' => $id));
 
+      $kohde->destroy_options($id);
       $kohde->destroy($id);
 
       Redirect::to('/match', array('message' => 'Kohde on poistettu tietokannasta!'));
