@@ -5,16 +5,16 @@
   <table class="table table-striped table-bordered">
     <thead>
       <tr>
-        <th>Id</th>
         <th>Nimi</th>
+        <th>Kohteita</th>
       </tr>
     </thead>
 
     <tbody>
       {% for laji in lajit %}
         <tr>
-          <td>{{laji.id}}</td>
-          <td>{{laji.nimi}}</td>
+          <td><a href="{{base_path}}/sport/{{laji.id}}">{{laji.nimi}}</td>
+          <td>{{laji.kohteita}}</td>
         </tr>
       {% endfor %}
     </tbody>

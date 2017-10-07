@@ -28,12 +28,34 @@ class Kohde extends BaseModel {
     }
 
     return null;
-    }
+  }
+
 
   public static function all() {
     $query = DB::connection()->prepare('SELECT * FROM Kohde');
 
     $query->execute();
+
+    $rows = $query->fetchAll();
+    $kohteet = array();
+
+    foreach($rows as $row){
+      $kohteet[] = new Kohde(array(
+        'id' => $row['id'],
+        'nimi' => $row['nimi'],
+        'tyyppi' => $row['tyyppi'],
+        'sulkeutumisaika' => $row['sulkeutumisaika'],
+        'tulos' => $row['tulos'],
+        'laji_id' => $row['laji_id']
+      ));
+    }
+
+    return $kohteet;
+  }
+
+  public static function list_by_sport($laji_id) {
+    $query = DB::connection()->prepare('SELECT * FROM Kohde WHERE laji_id = :laji_id');
+    $query->execute(array('laji_id' => $laji_id));
 
     $rows = $query->fetchAll();
     $kohteet = array();

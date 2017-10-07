@@ -77,8 +77,8 @@
       {% for veto in vedot %}
         <tr>
           <td><a href="{{base_path}}/match/{{veto.kohde_id}}">{{veto.nimi}}</td>
-          <td>{{veto.pelaaja}}</td>
-          <td>{{veto.valinta}}</td>
+          <td><a href="{{base_path}}/bettor/{{veto.vedonlyoja_id}}">{{veto.vedonlyoja_nimi}}</a></td>
+          <td><a href="{{base_path}}/bet/{{veto.id}}">{{veto.valinta}}</a></td>
           <td>{{veto.panos}}</td>
         </tr>
       {% endfor %}

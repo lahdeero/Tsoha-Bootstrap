@@ -37,6 +37,14 @@
 		MatchController::update($id);
 	});
 
+	$routes->get('/match/:id/options', function($id) {
+		MatchController::show_options($id);
+	});
+
+	$routes->post('/match/:id/options', function() {
+		MatchController::add_option();
+	});
+
 	$routes->post('/match/:id/destroy', function($id) {
 		MatchController::destroy($id);
 	});
@@ -63,7 +71,15 @@
 	});
 
 	$routes->get('/sport', function() {
-	  SportController::list();
+	  SportController::index();
+	});
+
+	$routes->get('/sport/:id', function($id) {
+	  SportController::list($id);
+	});
+
+	$routes->post('/option/:id/destroy', function($id) {
+		OptionController::destroy($id);
 	});
 
 	$routes->get('/suggestion', function() {

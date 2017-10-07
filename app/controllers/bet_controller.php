@@ -35,6 +35,7 @@
       $errors = array();
 
       if (count($errors) == 0){
+        $vedonlyoja->take_money($veto->vedonlyoja_id, $veto->panos);
         $veto->save();
         Redirect::to('/bet/' . $veto->id, array('message' => 'Veto hyväksytty!'));
       } else{

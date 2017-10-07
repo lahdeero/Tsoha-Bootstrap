@@ -12,18 +12,28 @@ INSERT INTO Vedonlyoja (nimi, salasana, saldo, rekisteroitymispaiva, yllapitaja)
 INSERT INTO Kohde (nimi, tyyppi, sulkeutumisaika, laji_id) VALUES ('Kuopolan koijaus - Keikkaus OU', '1X2', '2017-09-24T20:00:00', 1);
 INSERT INTO Kohde (nimi, tyyppi, sulkeutumisaika, laji_id) VALUES ('Pekkalan parhaat - Siippolan veijarit', '1X2', '2017-09-25T21:30:00', 1);
 INSERT INTO Kohde (nimi, tyyppi, sulkeutumisaika, laji_id) VALUES ('Jukolan jankkaajat - Mellulan melumiehet', '1X2', '2017-09-26T19:00:00', 1);
+INSERT INTO Kohde (nimi, tyyppi, sulkeutumisaika, laji_id) VALUES ('Vesihiihdon ALMM', 'Voittajaveto', '2017-12-24T19:00:00', 2);
 
-INSERT INTO Valinta(nimi, kohde_id) VALUES ('Kuopolan koijaus', 1);
-INSERT INTO Valinta(nimi, kohde_id) VALUES ('Tasapeli', 1);
-INSERT INTO Valinta(nimi, kohde_id) VALUES ('Keikkaus OU', 1);
+INSERT INTO Valinta(nimi, kerroin, kohde_id) VALUES ('Kuopolan koijaus', 1.8, 1);
+INSERT INTO Valinta(nimi, kerroin, kohde_id) VALUES ('Tasapeli', 3.5, 1);
+INSERT INTO Valinta(nimi, kerroin, kohde_id) VALUES ('Keikkaus OU', 2.4, 1);
 
-INSERT INTO Valinta(nimi, kohde_id) VALUES ('Pekkalan parhaat', 2);
-INSERT INTO Valinta(nimi, kohde_id) VALUES ('Tasapeli', 2);
-INSERT INTO Valinta(nimi, kohde_id) VALUES ('Siippolan veijarit', 2);
+INSERT INTO Valinta(nimi, kerroin, kohde_id) VALUES ('Pekkalan parhaat', 2.9, 2);
+INSERT INTO Valinta(nimi, kerroin, kohde_id) VALUES ('Tasapeli', 4.0, 2);
+INSERT INTO Valinta(nimi, kerroin, kohde_id) VALUES ('Siippolan veijarit', 2.8, 2);
 
-INSERT INTO Valinta(nimi, kohde_id) VALUES ('Jukolan jankkaajat', 3);
-INSERT INTO Valinta(nimi, kohde_id) VALUES ('Tasapeli', 3);
-INSERT INTO Valinta(nimi, kohde_id) VALUES ('Mellulan melumiehet', 3);
+INSERT INTO Valinta(nimi, kerroin, kohde_id) VALUES ('Jukolan jankkaajat', 1.8, 3);
+INSERT INTO Valinta(nimi, kerroin, kohde_id) VALUES ('Tasapeli', 4.0, 3);
+INSERT INTO Valinta(nimi, kerroin, kohde_id) VALUES ('Mellulan melumiehet', 1.8, 3);
+
+INSERT INTO Valinta(nimi, kerroin, kohde_id) VALUES ('Roope', 1.8, 4);
+INSERT INTO Valinta(nimi, kerroin, kohde_id) VALUES ('Aku', 2.4, 4);
+INSERT INTO Valinta(nimi, kerroin, kohde_id) VALUES ('Hessu', 3.3, 4);
+INSERT INTO Valinta(nimi, kerroin, kohde_id) VALUES ('Iines', 4.1, 4);
+INSERT INTO Valinta(nimi, kerroin, kohde_id) VALUES ('Mikki', 4.2, 4);
+INSERT INTO Valinta(nimi, kerroin, kohde_id) VALUES ('Minni', 5.7, 4);
+INSERT INTO Valinta(nimi, kerroin, kohde_id) VALUES ('Tulppu', 6.9, 4);
+INSERT INTO Valinta(nimi, kerroin, kohde_id) VALUES ('Kroisos', 7.7, 4);
 
 INSERT INTO Veto (panos, kohde_id, vedonlyoja_id, valinta_id) VALUES (10, 1, 1, 1);
 INSERT INTO Veto (panos, kohde_id, vedonlyoja_id, valinta_id) VALUES (17, 2, 2, 2);

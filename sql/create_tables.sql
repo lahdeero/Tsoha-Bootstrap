@@ -9,7 +9,7 @@ CREATE TABLE Kohde(
 	tyyppi varchar(50),
 	sulkeutumisaika varchar(50),
 	tulos varchar(8),
-	laji_id INTEGER REFERENCES Laji(id)
+	laji_id integer REFERENCES Laji(id)
 );
 
 CREATE TABLE Vedonlyoja(
@@ -24,8 +24,9 @@ CREATE TABLE Vedonlyoja(
 CREATE TABLE Valinta(
 	id SERIAL PRIMARY KEY,
 	nimi varchar(25),
+	kerroin decimal,
 	kohde_id integer,
-	FOREIGN KEY(kohde_id) REFERENCES Kohde(id)
+	FOREIGN KEY(kohde_id) REFERENCES Kohde(id) ON DELETE CASCADE
 );
 
 CREATE TABLE Veto(

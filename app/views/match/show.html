@@ -5,8 +5,11 @@
     <form method="post" action="{{base_path}}/match/{{kohde.id}}/destroy" style="display: inline-block;">
       <button type="submit" class="btn btn-danger">Poista</button>
     </form>
-    <a href="{{base_path}}/match/{{kohde.id}}/edit" class="btn btn-default">Muokkaa</a>
+    <a href="{{base_path}}/match/{{kohde.id}}/edit" class="btn btn-default">Muokkaa kohdetta</a>
+    <a href="{{base_path}}/match/{{kohde.id}}/options" class="btn btn-default">Muokkaa valintoja</a>
   </p>
+
+
   <ul>
     <li><strong>Id:</strong> {{kohde.id}}</li>
     <li><strong>Nimi:</strong> {{kohde.nimi}}</li>
@@ -22,7 +25,7 @@
         <label>Valinta</label>
         <select name="valinta_id" form="asetaVeto">
           {% for valinta in valinnat %}
-            <option value="{{valinta.id}}">{{valinta.nimi}}</option>
+            <option value="{{valinta.id}}">{{valinta.nimi}} ({{valinta.kerroin}})</option>
           {% endfor %}
         </select>
       </div>
@@ -40,8 +43,7 @@
         <button type="submit" class="btn btn-primary">Aseta veto</button>
       </div>
     </form>
-
+  </p>
     {% endif %}
 
-  </p>
 {% endblock %}

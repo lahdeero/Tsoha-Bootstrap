@@ -2,11 +2,13 @@
 {% block content %}
   <h1>{{veto.nimi}}</h1>
   <ul>
-    <li><strong>Id:</strong> {{veto.id}}</li>
+    <li><strong>Vedonlyoja:</strong> <a href={{base_path}}/bettor/{{veto.vedonlyoja_id}}>{{veto.vedonlyoja_nimi}}</a></li>
     <li><strong>Kohde:</strong> <a href={{base_path}}/match/{{veto.kohde_id}}>{{veto.kohde}}</a></li>
+    <li><strong>Kohteen tyyppi:</strong> {{veto.kohde_tyyppi}}</li>
     <li><strong>Valinta:</strong> {{veto.valinta}}</li>
+    <li><strong>Kerroin:</strong> {{veto.kerroin}}</li>
     <li><strong>Panos:</strong> {{veto.panos}}</li>
-    <li><strong>Palautus:</strong> {{veto.palautus}}</li>
+    <li><strong>Mahdollinen voitto:</strong> {{veto.mahdollinen_voitto}}</li>
   </ul>
   <br>
 {% endblock %}
