@@ -17,13 +17,14 @@
 
       //$errors = $kohde->errors();
       $errors = array();
+      $errors = $valinta->errors();
 
       // Kutsutaan alustamamme olion save metodia, joka tallentaa olion tietokantaan
       if (count($errors) == 0){
         $valinta->save();
         Redirect::to('/match/' . $kohde->id . '/options', array('message' => 'Valinta on lisätty kohteeseen!'));
       } else{
-        View::make('match/' . $kohde->id . '/options', array('errors' => $errors, 'attributes' => $attributes));
+        Redirect::to('/match/' . $kohde->id . '/options', array('errors' => $errors, 'attributes' => $attributes));
       }
     }
 

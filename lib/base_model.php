@@ -22,11 +22,7 @@
       }
       if(strlen($this->nimi) < 3){
         $errors[] = 'Nimen pituuden tulee olla vähintään kolme merkkiä!';
-      }
-      if(strlen($this->nimi) < 3){
-        $errors[] = 'Nimen pituuden tulee olla vähintään kolme merkkiä!';
-      }
-      if(strlen($this->nimi) > 15){
+      } else if(strlen($this->nimi) > 15){
         $errors[] = 'Nimen pituus ei saa olla yli 15 merkkiä!';
       }
 
@@ -70,6 +66,7 @@
       } else if ($this->kerroin > 1000) {
         $errors[] = 'Kerroin ei saa olla yli tuhat!';
       }
+      return $errors;
     }
 
     public function errors(){
