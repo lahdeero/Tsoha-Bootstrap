@@ -1,6 +1,7 @@
 <?php
 
 class UserController extends BaseController{
+
   public static function login() {
       View::make('bettor/login.html');
   }
@@ -25,6 +26,8 @@ class UserController extends BaseController{
       Redirect::to('/', array('message' => 'Tervetuloa takaisin ' . $user->username . '!'));
     }
   }
+
+
 
 }
 

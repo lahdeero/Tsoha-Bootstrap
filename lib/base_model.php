@@ -23,8 +23,53 @@
       if(strlen($this->nimi) < 3){
         $errors[] = 'Nimen pituuden tulee olla vähintään kolme merkkiä!';
       }
+      if(strlen($this->nimi) < 3){
+        $errors[] = 'Nimen pituuden tulee olla vähintään kolme merkkiä!';
+      }
+      if(strlen($this->nimi) > 15){
+        $errors[] = 'Nimen pituus ei saa olla yli 15 merkkiä!';
+      }
 
       return $errors;
+    }
+
+    public function validate_salasana(){
+      $errors = array();
+      if($this->salasana == '' || $this->salasana == null){
+        $errors[] = 'Salasana ei saa olla tyhjä!';
+      }
+      if(strlen($this->salasana) < 3){
+        $errors[] = 'Salasanan pituuden tulee olla vähintään kolme merkkiä!';
+      }
+      if(strlen($this->salasana) > 15){
+        $errors[] = 'Salasana ei saa olla yli 15 merkkiä pitkä!';
+      }
+      return $errors;
+    }
+    public function validate_panos(){
+      $errors = array();
+      if($this->panos < 1) {
+        $errors[] = 'Panos ei saa olla alle yhden!';
+      }
+      return $errors;
+    }
+    public function validate_saldo(){
+      $errors = array();
+      $vedonlyoja = Vedonlyoja::find($this->vedonlyoja_id);
+
+      if($this->panos > $vedonlyoja->saldo) {
+        $errors[] = 'Ei tarpeeksi saldoa!';
+      }
+      return $errors;
+    }
+    public function validate_kerroin() {
+      $errors = array();
+
+      if($this->kerroin <= 1) {
+        $errors[] = 'Kertoimen tulee olla yli yhden!';
+      } else if ($this->kerroin > 1000) {
+        $errors[] = 'Kerroin ei saa olla yli tuhat!';
+      }
     }
 
     public function errors(){

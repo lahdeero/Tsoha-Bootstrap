@@ -1,5 +1,16 @@
 {% extends "base.html" %}
 {% block content %}
+
+{% if errors %}
+  <div class="alert alert-danger">
+    <ul>
+      {% for error in errors %}
+        <li>{{error}}</li>
+      {% endfor %}
+    </ul>
+  </div>
+{% endif %}
+
   <h1>{{kohde.nimi}}</h1>
   <p>
     <form method="post" action="{{base_path}}/match/{{kohde.id}}/destroy" style="display: inline-block;">
@@ -32,7 +43,7 @@
 
       <div class="form-group">
         <label>Panos</label>
-        <input type="text" name="panos" maxlength="5" size="5" class="form-control" >
+        <input type="number" name="panos" maxlength="5" size="5" class="form-control" >
       </div>
 
       <div class="form-group">

@@ -42,7 +42,7 @@
 	});
 
 	$routes->post('/match/:id/options', function() {
-		MatchController::add_option();
+		OptionController::add();
 	});
 
 	$routes->post('/match/:id/destroy', function($id) {
@@ -62,10 +62,15 @@
 	$routes->get('/bettor', function() {
 	  BettorController::index();
 	});
+	$routes->post('bettor/:id/update', function($id) {
+		BettorController::change_password($id);
+	});
+	$routes->get('/bettor/:id/update', function($id) {
+		BettorController::update($id);
+	});
 	$routes->get('/bettor/:id', function($id) {
 	  BettorController::show($id);
 	});
-
 	$routes->get('/admin', function() {
 	  AdminController::index();
 	});

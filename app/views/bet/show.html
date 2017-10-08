@@ -1,7 +1,8 @@
 {% extends "base.html" %}
 {% block content %}
-  <h1>{{veto.nimi}}</h1>
+  <h1>Virtuaalinen tosite</h1>
   <ul>
+    <li><strong>Tunniste:</strong> {{veto.id}}</li>
     <li><strong>Vedonlyoja:</strong> <a href={{base_path}}/bettor/{{veto.vedonlyoja_id}}>{{veto.vedonlyoja_nimi}}</a></li>
     <li><strong>Kohde:</strong> <a href={{base_path}}/match/{{veto.kohde_id}}>{{veto.kohde}}</a></li>
     <li><strong>Kohteen tyyppi:</strong> {{veto.kohde_tyyppi}}</li>

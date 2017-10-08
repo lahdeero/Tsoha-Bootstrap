@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block content %}
+  <h1>Vaihda salasana käyttäjälle {{vedonlyoja.nimi}}</h1>
+
+  {% if message %}
+    <div class="alert alert-success">
+      {{message}}
+    </div>
+  {% endif %}
+
+  {% if error %}
+    <div class="alert alert-danger">
+          <li>{{error}}</li>
+    </div>
+  {% endif %}
+
+  <form method="post" action="{{base_path}}/bettor/{{vedonlyoja.id}}/update">
+
+    <div class="form-group">
+      <label>Uusi salasana</label>
+      <input type="password" class="form-control" name="password">
+    </div>
+
+    <button type="submit" class="btn btn-primary">Vaihda salasana</button>
+  </form>
+{% endblock %}

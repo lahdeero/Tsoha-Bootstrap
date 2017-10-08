@@ -37,8 +37,8 @@ CREATE TABLE Veto(
 	vedonlyoja_id integer,
 	valinta_id integer,
 	FOREIGN KEY(kohde_id) REFERENCES Kohde(id) ON DELETE CASCADE,
-	FOREIGN KEY(vedonlyoja_id) REFERENCES Vedonlyoja(id),
-	FOREIGN KEY(valinta_id) REFERENCES Valinta(id)
+	FOREIGN KEY(vedonlyoja_id) REFERENCES Vedonlyoja(id) ON DELETE CASCADE,
+	FOREIGN KEY(valinta_id) REFERENCES Valinta(id) ON DELETE SET NULL
 );
 
 CREATE TABLE Ehdotus(

@@ -6,6 +6,7 @@ class Vedonlyoja extends BaseModel {
 
   public function __construct($attributes){
     parent::__construct($attributes);
+    $this->validators = array('validate_nimi', 'validate_salasana');
   }
 
   public static function find($id){
@@ -49,7 +50,7 @@ class Vedonlyoja extends BaseModel {
   }
 
   public static function toplist($howmany) {
-    $query = DB::connection()->prepare('SELECT nimi,saldo,rekisteroitymispaiva FROM Vedonlyoja ORDER BY saldo DESC LIMIT :howmany');
+    $query = DB::connection()->prepare('SELECT id,nimi,saldo,rekisteroitymispaiva FROM Vedonlyoja ORDER BY saldo DESC LIMIT :howmany');
     $query->execute(array('howmany' => $howmany));
 
     $rows = $query->fetchAll();
@@ -57,6 +58,7 @@ class Vedonlyoja extends BaseModel {
 
     foreach($rows as $row){
       $vedonlyojat[] = new Vedonlyoja(array(
+        'id' => $row['id'],
         'nimi' => $row['nimi'],
         'saldo' => $row['saldo'],
         'rekisteroitymispaiva' => $row['rekisteroitymispaiva']
@@ -71,4 +73,8 @@ class Vedonlyoja extends BaseModel {
     $query->execute(array('how_much' => $how_much, 'id' => $id));
   }
 
+  public static function change_password($username, $new_password) {
+    $query = DB::connection()->prepare('UPDATE Vedonlyoja SET salasana = :new_password WHERE nimi = :username');
+    $query->execute(array('new_password' => $new_password, 'username' => $username));
+  }
 }

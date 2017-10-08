@@ -6,7 +6,7 @@
       $vedonlyojat = Vedonlyoja::toplist(3);
       $vedot = Veto::newest(3);
 
-      View::make('etusivu.html', array('vedonlyojat' => $vedonlyojat, 'kohteet' => $kohteet, 'vedot' => $vedot));
+      View::make('index.html', array('vedonlyojat' => $vedonlyojat, 'kohteet' => $kohteet, 'vedot' => $vedot));
 
     }
   }

@@ -4,6 +4,11 @@ class Valinta extends BaseModel {
 
   public $id, $nimi, $kerroin, $kohde_id;
 
+  public function __construct($attributes){
+    parent::__construct($attributes);
+    $this->validators = array('validate_nimi', 'validate_kerroin');
+  }
+
   public static function find($kohde_id) {
     $query = DB::connection()->prepare('SELECT * FROM Valinta WHERE kohde_id = :kohde_id');
     $query->execute(array('kohde_id' => $kohde_id));
