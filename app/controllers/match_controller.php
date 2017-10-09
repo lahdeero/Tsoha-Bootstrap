@@ -4,14 +4,20 @@
     public static function list(){
       $kohteet = Kohde::all();
 
-      View::make('match/index.html', array('kohteet' => $kohteet, 'yllapitaja' => $_SESSION['yllapitaja']));
+      if(isset($_SESSION['yllapitaja']))  {
+          View::make('match/index.html', array('kohteet' => $kohteet, 'yllapitaja' => $_SESSION['yllapitaja']));
+      }
+      View::make('match/index.html', array('kohteet' => $kohteet));
     }
 
     public static function show($id){
       $kohde = Kohde::find($id);
       $valinnat = Valinta::find($id);
 
-      View::make('match/show.html', array('kohde' => $kohde, 'valinnat' => $valinnat, 'yllapitaja' => $_SESSION['yllapitaja']));
+      if(isset($_SESSION['yllapitaja']))  {
+          View::make('match/show.html', array('kohde' => $kohde, 'valinnat' => $valinnat, 'yllapitaja' => $_SESSION['yllapitaja']));
+      }
+      View::make('match/show.html', array('kohde' => $kohde, 'valinnat' => $valinnat));
     }
 
     public static function create() {
@@ -49,8 +55,7 @@
     public static function edit($id) {
       self::check_logged_in();
       $kohde = Kohde::find($id);
-      $valinnat = Valinta::find($id);
-      View::make('match/edit.html', array('kohde' => $kohde, 'valinnat' => $valinnat));
+      View::make('match/edit.html', array('kohde' => $kohde));
     }
 
     public static function options($id) {
@@ -75,7 +80,7 @@
       $errors = $kohde->errors();
 
       if (count($errors) > 0) {
-        View::make('kohde/edit.html', array('errors' => $errors, 'attributes' => $attributes));
+        View::make('match/edit.html', array('errors' => $errors, 'kohde' => $kohde));
       } else {
         $kohde->update($id);
 

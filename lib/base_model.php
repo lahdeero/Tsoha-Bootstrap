@@ -28,6 +28,20 @@
 
       return $errors;
     }
+    public function validate_tyyppi() {
+      $errors = array();
+      if($this->tyyppi == '' || $this->tyyppi == null){
+        $errors[] = 'Tyyppi ei saa olla tyhjä!';
+      }
+      return $errors;
+    }
+    public function validate_sulkeutumisaika() {
+      $errors = array();
+      if($this->sulkeutumisaika == '' || $this->sulkeutumisaika == null) {
+        $errors[] = 'Sulkeutumisaika ei saa olla tyhjä!';
+      }
+      return $errors;
+    }
 
     public function validate_salasana(){
       $errors = array();

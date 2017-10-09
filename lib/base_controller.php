@@ -27,8 +27,9 @@
 
     public static function check_admin(){
       if(!isset($_SESSION['yllapitaja'])){
-        Redirect::to('/login', array('message' => 'Toiminto vaatii ylläpitäjätunnuksen!'));
+        return 1;
       }
+      return null;
     }
 
   }
