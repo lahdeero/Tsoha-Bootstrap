@@ -1,10 +1,11 @@
 {% extends "base.html" %}
 {% block content %}
   <h1>Kohteet</h1>
-
-  <p>
-    <a href="{{base_path}}/match/new" class="btn btn-success">Lisää kohde</a>
-  </p>
+  {% if yllapitaja %}
+    <p>
+      <a href="{{base_path}}/match/new" class="btn btn-success">Lisää kohde</a>
+    </p>
+  {% endif %}
 
   <table class="table table-striped table-bordered">
     <thead>

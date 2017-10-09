@@ -22,8 +22,8 @@
       }
       if(strlen($this->nimi) < 3){
         $errors[] = 'Nimen pituuden tulee olla vähintään kolme merkkiä!';
-      } else if(strlen($this->nimi) > 15){
-        $errors[] = 'Nimen pituus ei saa olla yli 15 merkkiä!';
+      } else if(strlen($this->nimi) > 65){
+        $errors[] = 'Nimen pituus ei saa olla yli 65 merkkiä!';
       }
 
       return $errors;
@@ -65,6 +65,16 @@
         $errors[] = 'Kertoimen tulee olla yli yhden!';
       } else if ($this->kerroin > 1000) {
         $errors[] = 'Kerroin ei saa olla yli tuhat!';
+      }
+      return $errors;
+    }
+    public function validate_valinta() {
+      $errors = array();
+
+      if  ($this->valinta_id == null) {
+        $errors[] = 'Valinta ei saa olla tyhjä!';
+      } else if (!is_numeric($this->valinta_id)) {
+        $errors[] = 'Jotain outoa tapahtui!';
       }
       return $errors;
     }

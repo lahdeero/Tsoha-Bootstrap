@@ -1,5 +1,7 @@
 <?php
 
+
+
 	$routes->get('/', function() {
 		FrontPageController::index();
 	});
@@ -38,11 +40,19 @@
 	});
 
 	$routes->get('/match/:id/options', function($id) {
-		MatchController::show_options($id);
+		MatchController::options($id);
 	});
 
 	$routes->post('/match/:id/options', function() {
 		OptionController::add();
+	});
+
+	$routes->get('/match/:id/complete', function($id) {
+		MatchController::complete($id);
+	});
+
+	$routes->post('/match/:id/complete', function() {
+		MatchController::end();
 	});
 
 	$routes->post('/match/:id/destroy', function($id) {
@@ -52,9 +62,11 @@
 	$routes->get('/bet', function() {
 	  BetController::list();
 	});
+
 	$routes->get('/bet/:id', function($id) {
 	  BetController::show($id);
 	});
+
 	$routes->post('/bet', function() {
 		BetController::store();
 	});
@@ -62,15 +74,19 @@
 	$routes->get('/bettor', function() {
 	  BettorController::index();
 	});
-	$routes->post('bettor/:id/update', function($id) {
-		BettorController::change_password($id);
+
+	$routes->post('/update', function() {
+		UserController::update();
 	});
+
 	$routes->get('/bettor/:id/update', function($id) {
-		BettorController::update($id);
+		BettorController::edit($id);
 	});
+
 	$routes->get('/bettor/:id', function($id) {
 	  BettorController::show($id);
 	});
+
 	$routes->get('/admin', function() {
 	  AdminController::index();
 	});

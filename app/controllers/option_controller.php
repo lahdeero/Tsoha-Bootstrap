@@ -24,7 +24,8 @@
         $valinta->save();
         Redirect::to('/match/' . $kohde->id . '/options', array('message' => 'Valinta on lisätty kohteeseen!'));
       } else{
-        Redirect::to('/match/' . $kohde->id . '/options', array('errors' => $errors, 'attributes' => $attributes));
+        Redirect::to('/match/' . $kohde->id . '/options', array('errors' => $errors,
+        'valinnan_nimi' => $params['valinnan_nimi'], 'kerroin' => $params['kerroin']));
       }
     }
 

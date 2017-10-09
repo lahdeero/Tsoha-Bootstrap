@@ -23,6 +23,11 @@
       self::check_logged_in();
       $params = $_POST;
 
+      if (!isset($params['valinta_id'])) {
+        $errors[] = 'Et voi lyödä kohdetta ilman valintaa!';
+        Redirect::to('/match/' . $params['kohde_id'], array('errors' => $errors));
+      }
+
       $attributes = array(
         'panos' => $params['panos'],
         'kohde_id' => $params['kohde_id'],
@@ -35,7 +40,7 @@
       $errors = $veto->errors();
 
       if (count($errors) == 0){
-        $vedonlyoja->take_money($veto->vedonlyoja_id, $veto->panos);
+        $vedonlyoja->takeMoney($veto->vedonlyoja_id, $veto->panos);
         $veto->save();
         Redirect::to('/bet/' . $veto->id, array('message' => 'Veto hyväksytty!'));
       } else{

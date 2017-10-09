@@ -5,7 +5,7 @@ class Kohde extends BaseModel {
 
   public function __construct($attributes){
     parent::__construct($attributes);
-    $this->validators = array('validate_nimi');
+    $this->validators = array('validate_nimi', 'validate_tyyppi', 'validate_sulkeutumisaika');
   }
 
   public static function find($id){
@@ -32,7 +32,7 @@ class Kohde extends BaseModel {
 
 
   public static function all() {
-    $query = DB::connection()->prepare('SELECT * FROM Kohde');
+    $query = DB::connection()->prepare('SELECT * FROM Kohde ORDER BY sulkeutumisaika DESC');
 
     $query->execute();
 
@@ -115,4 +115,5 @@ class Kohde extends BaseModel {
     $query = DB::connection()->prepare('UPDATE Kohde SET nimi = :nimi, tyyppi = :tyyppi, sulkeutumisaika = :sulkeutumisaika, tulos = :tulos WHERE id = :id');
     $query->execute(array('nimi' => $this->nimi, 'tyyppi' => $this->tyyppi, 'sulkeutumisaika' => $this->sulkeutumisaika, 'tulos' => $this->tulos, 'id' => $id));
   }
+
 }

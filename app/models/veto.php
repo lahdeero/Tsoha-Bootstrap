@@ -7,7 +7,7 @@ class Veto extends BaseModel {
 
   public function __construct($attributes){
     parent::__construct($attributes);
-    $this->validators = array('validate_panos', 'validate_saldo');
+    $this->validators = array('validate_panos', 'validate_saldo', 'validate_valinta');
   }
 
   public static function find($id){
@@ -46,7 +46,7 @@ class Veto extends BaseModel {
     $query = DB::connection()->prepare('SELECT Veto.Id, Veto.kohde_id, Kohde.nimi as kohde_nimi, Panos,
        Valinta.nimi as valinta_nimi, Veto.vedonlyoja_id,  vedonlyoja.nimi as vedonlyoja_nimi
        FROM Veto LEFT JOIN Kohde ON Veto.kohde_id = Kohde.id LEFT JOIN Valinta ON Veto.valinta_id = Valinta.id
-       LEFT JOIN Vedonlyoja ON Veto.vedonlyoja_id = Vedonlyoja.id');
+       LEFT JOIN Vedonlyoja ON Veto.vedonlyoja_id = Vedonlyoja.id ORDER BY Veto.id DESC');
 
     $query->execute();
 
@@ -73,6 +73,11 @@ class Veto extends BaseModel {
       $query->execute(array('panos' => $this->panos, 'kohde_id' => $this->kohde_id, 'vedonlyoja_id' => $this->vedonlyoja_id, 'valinta_id' => $this->valinta_id));
       $row = $query->fetch();
       $this->id = $row['id'];
+  }
+
+  public static function update($kohde_id, $kerroin, $tulos) {
+    $query = DB::connection()->prepare('UPDATE Veto SET palautus = panos * :kerroin WHERE kohde_id = :kohde_id AND valinta_id = :tulos');
+    $query->execute(array('kohde_id' => $kohde_id, 'kerroin' => $kerroin, 'tulos' => $tulos));
   }
 
   public static function newest($howmany) {
@@ -124,4 +129,31 @@ class Veto extends BaseModel {
 
       return null;
   }
+  public static function all_bets_in_match($kohde_id) {
+    $query = DB::connection()->prepare('UPDATE Veto SET palautus = 0 WHERE kohde_id = :kohde_id');
+    $query->execute(array('kohde_id' => $kohde_id));
+  }
+  public static function winning_bets($kohde_id, $kerroin, $tulos) {
+    $query = DB::connection()->prepare('SELECT id,panos,vedonlyoja_id FROM Veto WHERE kohde_id = :kohde_id AND valinta_id = :tulos');
+    $query->execute(array('kohde_id' => $kohde_id, 'tulos' => $tulos));
+    $rows = $query->fetchAll();
+
+    $vedot = array();
+    if($rows){
+      foreach($rows as $row){
+        $vedot[] = new Veto(array(
+          'id' => $row['id'],
+          'panos' => $row['panos'],
+          'vedonlyoja_id' => $row['vedonlyoja_id']
+        ));
+      }
+      return $vedot;
+    }
+    return null;
+  }
+  public static function payWin($id, $how_much) {
+    $query = DB::connection()->prepare('UPDATE Vedonlyoja SET saldo = saldo + :how_much WHERE id = :id');
+    $query->execute(array('how_much' => $how_much, 'id' => $id));
+  }
+
 }

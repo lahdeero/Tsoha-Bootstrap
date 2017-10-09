@@ -67,14 +67,10 @@ class Vedonlyoja extends BaseModel {
 
     return $vedonlyojat;
   }
-
-  public static function take_money($id, $how_much) {
+  public static function takeMoney($id, $how_much) {
     $query = DB::connection()->prepare('UPDATE Vedonlyoja SET saldo = saldo - :how_much WHERE id = :id');
     $query->execute(array('how_much' => $how_much, 'id' => $id));
   }
 
-  public static function change_password($username, $new_password) {
-    $query = DB::connection()->prepare('UPDATE Vedonlyoja SET salasana = :new_password WHERE nimi = :username');
-    $query->execute(array('new_password' => $new_password, 'username' => $username));
-  }
+
 }

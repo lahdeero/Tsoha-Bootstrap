@@ -4,14 +4,14 @@
     public static function list(){
       $kohteet = Kohde::all();
 
-      View::make('match/index.html', array('kohteet' => $kohteet));
+      View::make('match/index.html', array('kohteet' => $kohteet, 'yllapitaja' => $_SESSION['yllapitaja']));
     }
 
     public static function show($id){
       $kohde = Kohde::find($id);
       $valinnat = Valinta::find($id);
 
-      View::make('match/show.html', array('kohde' => $kohde, 'valinnat' => $valinnat));
+      View::make('match/show.html', array('kohde' => $kohde, 'valinnat' => $valinnat, 'yllapitaja' => $_SESSION['yllapitaja']));
     }
 
     public static function create() {
@@ -41,19 +41,19 @@
         $kohde->save();
         Redirect::to('/match/' . $kohde->id, array('message' => 'Kohde on lisätty tietokantaan!'));
       } else{
-        View::make('match/new.html', array('errors' => $errors, 'attributes' => $attributes));
+        $lajit = Laji::all();
+        View::make('match/new.html', array('errors' => $errors, 'attributes' => $attributes, 'lajit' => $lajit));
       }
-
-      // Ohjataan käyttäjä lisäyksen jälkeen pelin esittelysivulle
 
     }
     public static function edit($id) {
       self::check_logged_in();
       $kohde = Kohde::find($id);
-      View::make('match/edit.html', array('kohde' => $kohde));
+      $valinnat = Valinta::find($id);
+      View::make('match/edit.html', array('kohde' => $kohde, 'valinnat' => $valinnat));
     }
 
-    public static function show_options($id) {
+    public static function options($id) {
         self::check_logged_in();
         $kohde = Kohde::find($id);
         $valinnat = Valinta::find($id);
@@ -68,8 +68,7 @@
         'id' => $id,
         'nimi' => $params['nimi'],
         'tyyppi' => $params['tyyppi'],
-        'sulkeutumisaika' => $params['sulkeutumisaika'],
-        'tulos' => $params['tulos']
+        'sulkeutumisaika' => $params['sulkeutumisaika']
       );
 
       $kohde = new Kohde($attributes);
@@ -83,17 +82,50 @@
         Redirect::to('/match/' . $kohde->id, array('message' => 'Kohdetta on muokattu onnistuneesti'));
       }
     }
-
     public static function destroy($id) {
-      self::check_logged_in();
-
-      $kohde = new Kohde(array('id' => $id));
-
-      //$kohde->destroy_options($id);
-      $kohde->destroy($id);
-
-      Redirect::to('/match', array('message' => 'Kohde on poistettu tietokannasta!'));
+        self::check_logged_in();
+        $kohde = new Kohde(array('id' => $id));
+        $kohde->destroy($id);
+        Redirect::to('/match', array('message' => 'Kohde on poistettu tietokannasta!'));
+    }
+    public static function complete($id) {
+        self::check_logged_in();
+        $kohde = Kohde::find($id);
+        $valinnat = Valinta::find($id);
+        View::make('match/complete.html', array('kohde' => $kohde, 'valinnat' => $valinnat));
     }
 
+    public static function end() {
+      self::check_admin();
+      $params = $_POST;
+
+      $attributes = array(
+        'id' => $params['id'],
+        'nimi' => $params['nimi'],
+        'tyyppi' => $params['tyyppi'],
+        'sulkeutumisaika' => $params['sulkeutumisaika'],
+        'tulos' => $params['tulos']
+      );
+
+      $kohde = new Kohde($attributes);
+      $errors = $kohde->errors();
+
+      if (count($errors) > 0) {
+        View::make('kohde/complete.html', array('errors' => $errors, 'attributes' => $attributes));
+      } else {
+        $valinta = Valinta::find_option($kohde->tulos);
+        Veto::update($kohde->id, $valinta->kerroin, $kohde->tulos);
+        Veto::all_bets_in_match($kohde->id);
+        $vedot = Veto::winning_bets($kohde->id, $valinta->kerroin, $kohde->tulos);
+
+        if ($vedot) {
+          foreach ($vedot as $veto) {
+            $veto->payWin($veto->vedonlyoja_id, $veto->panos * $valinta->kerroin);
+          }
+          Redirect::to('/match/' . $kohde->id, array('message' => 'Tulos asetettu ja voittajien tileille hyvitetty lisätty saldoa!'));
+        }
+        Redirect::to('/match/' . $kohde->id, array('message' => 'Tulos asetettu, ei voittajia!'));
+      }
+    }
   }
 ?>

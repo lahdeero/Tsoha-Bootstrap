@@ -1,25 +1,17 @@
 {% extends "base.html" %}
 {% block content %}
 
-{% if errors %}
-  <div class="alert alert-danger">
-    <ul>
-      {% for error in errors %}
-        <li>{{error}}</li>
-      {% endfor %}
-    </ul>
-  </div>
-{% endif %}
-
   <h1>{{kohde.nimi}}</h1>
-  <p>
-    <form method="post" action="{{base_path}}/match/{{kohde.id}}/destroy" style="display: inline-block;">
-      <button type="submit" class="btn btn-danger">Poista</button>
-    </form>
-    <a href="{{base_path}}/match/{{kohde.id}}/edit" class="btn btn-default">Muokkaa kohdetta</a>
-    <a href="{{base_path}}/match/{{kohde.id}}/options" class="btn btn-default">Muokkaa valintoja</a>
-  </p>
-
+  {% if yllapitaja %}
+    <p>
+      <form method="post" action="{{base_path}}/match/{{kohde.id}}/destroy" class="destroy-form" data-confirm="Oletko varma että haluat poistaa kohteen?">
+        <button type="submit" class="btn btn-danger">Poista</button>
+      </form>
+      <a href="{{base_path}}/match/{{kohde.id}}/edit" class="btn btn-default">Muokkaa kohdetta</a>
+      <a href="{{base_path}}/match/{{kohde.id}}/options" class="btn btn-default">Muokkaa valintoja</a>
+      <a href="{{base_path}}/match/{{kohde.id}}/complete" class="btn btn-default">Aseta tulos</a>
+    </p>
+  {% endif %}
 
   <ul>
     <li><strong>Id:</strong> {{kohde.id}}</li>
@@ -43,7 +35,7 @@
 
       <div class="form-group">
         <label>Panos</label>
-        <input type="number" name="panos" maxlength="5" size="5" class="form-control" >
+        <input type="number" step="0.1" name="panos" maxlength="5" size="5" class="form-control" >
       </div>
 
       <div class="form-group">

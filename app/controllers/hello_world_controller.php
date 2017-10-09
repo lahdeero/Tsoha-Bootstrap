@@ -11,6 +11,7 @@
 
       Kint::dump($ekapeli);
       Kint::dump($kohteet);
+
     }
   }
 ?>
