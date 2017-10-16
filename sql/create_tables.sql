@@ -5,8 +5,8 @@ CREATE TABLE Laji(
 
 CREATE TABLE Kohde(
 	id SERIAL PRIMARY KEY,
-	nimi varchar(50),
-	tyyppi varchar(50),
+	nimi varchar(70),
+	tyyppi varchar(25),
 	sulkeutumisaika varchar(50),
 	tulos varchar(8),
 	laji_id integer REFERENCES Laji(id)
@@ -43,8 +43,8 @@ CREATE TABLE Veto(
 
 CREATE TABLE Ehdotus(
 	id SERIAL PRIMARY KEY,
-	nimi varchar(40) NOT NULL,
-	selvennys varchar(500),
+	nimi varchar(70) NOT NULL,
+	selvennys varchar(505),
 	laji_id integer,
 	FOREIGN KEY(laji_id) REFERENCES Laji(id)
 )

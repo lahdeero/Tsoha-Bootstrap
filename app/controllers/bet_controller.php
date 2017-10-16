@@ -32,9 +32,9 @@
         $errors[] = 'Et voi lyödä kohdetta ilman valintaa!';
       }
       if ($sulkeutumispaiva < $nykyhetki) {
-      $errors[] = 'Kohde on suljettu!';
-    	// $errors[] = 'nykyhetki: ' . $nykyhetki; // Jätetään nää jos tarvii vielä debugata
-    	// $errors[] =  'sulkeutumishetki: ' . $sulkeutumispaiva;
+        $errors[] = 'Kohde on suljettu!';
+  	     // $errors[] = 'nykyhetki: ' . $nykyhetki; // Jätetään nää jos tarvii vielä debugata
+  	    // $errors[] =  'sulkeutumishetki: ' . $sulkeutumispaiva;
       }
 
       if (count($errors) > 0) {

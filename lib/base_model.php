@@ -28,10 +28,25 @@
 
       return $errors;
     }
+    public function validate_selvennys(){
+      $errors = array();
+      if($this->selvennys == '' || $this->selvennys == null){
+        $errors[] = 'Selvennys ei saa olla tyhjä!';
+      }
+      if(strlen($this->selvennys) < 3){
+        $errors[] = 'Selvityksen pituuden tulee olla vähintään kolme merkkiä!';
+      } else if(strlen($this->selvennys) > 500){
+        $errors[] = 'Selvennyksen pituus ei saa olla yli 500 merkkiä!';
+      }
+
+      return $errors;
+    }
     public function validate_tyyppi() {
       $errors = array();
       if($this->tyyppi == '' || $this->tyyppi == null){
         $errors[] = 'Tyyppi ei saa olla tyhjä!';
+      } else if(strlen($this->tyyppi) > 20) {
+        $errors[] = 'Tyyppi ei saa olla yli 20 merkkiä pitkä!';
       }
       return $errors;
     }

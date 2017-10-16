@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block content %}
+  <h1>Lisää ehdotus</h1>
+
+  <form method="post" action="{{base_path}}/suggestion/new">
+
+    <div class="form-group">
+      <label>Ehdotettavan vedon nimi(max. 65 merkkiä)</label>
+      <input type="text" class="form-control" name="nimi" value="{{attributes.nimi}}">
+    </div>
+
+    <div class="form-group">
+      <label>Selvennys(max. 500 merkkiä)</label>
+      <input type="textarea" class="form-control" name="selvennys" value="{{attributes.selvennys}}">
+    </div>
+
+    <button type="submit" class="btn btn-primary">Talleta</button>
+  </form>
+{% endblock %}

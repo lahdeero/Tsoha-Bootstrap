@@ -79,8 +79,8 @@
 		UserController::update();
 	});
 
-	$routes->get('/bettor/:id/update', function($id) {
-		BettorController::edit($id);
+	$routes->get('/bettor/update', function() {
+		BettorController::edit();
 	});
 	$routes->get('/bettor/deposit', function() {
 		BettorController::balance();
@@ -111,6 +111,12 @@
 
 	$routes->get('/suggestion', function() {
 	  SuggestionController::list();
+	});
+	$routes->get('/suggestion/new', function() {
+		SuggestionController::new();
+	});
+	$routes->post('/suggestion/new', function() {
+		SuggestionController::store();
 	});
 
 	$routes->get('/hiekkalaatikko', function() {

@@ -5,21 +5,23 @@
       $options = self::paging_options(Kohde::count());
 
       $kohteet = Kohde::all($options);
+      $parametrit = array('kohteet' => $kohteet, 'pages' => $options['pages'], 'prev_page' => $options['prev_page'], 'next_page' => $options['next_page']);
 
-      if(isset($_SESSION['yllapitaja']))  {
-          View::make('match/index.html', array('kohteet' => $kohteet, 'yllapitaja' => $_SESSION['yllapitaja'], 'pages' => $options['pages'], 'prev_page' => $options['prev_page'], 'next_page' => $options['next_page']));
+      if($_SESSION['yllapitaja'] == 1)  {
+        $parametrit['yllapitaja'] = 1;
       }
-      View::make('match/index.html', array('kohteet' => $kohteet, 'pages' => $options['pages'], 'prev_page' => $options['prev_page'], 'next_page' => $options['next_page']));
+      View::make('match/index.html', $parametrit);
     }
 
     public static function show($id){
       $kohde = Kohde::find($id);
       $valinnat = Valinta::find($id);
 
-      if(isset($_SESSION['yllapitaja']))  {
-          View::make('match/show.html', array('kohde' => $kohde, 'valinnat' => $valinnat, 'yllapitaja' => $_SESSION['yllapitaja']));
+      $parametrit = array('kohde' => $kohde, 'valinnat' => $valinnat);
+      if($_SESSION['yllapitaja'] == 1)  {
+          $parametrit['yllapitaja'] = 1;
       }
-      View::make('match/show.html', array('kohde' => $kohde, 'valinnat' => $valinnat));
+      View::make('match/show.html', $parametrit);
     }
 
     public static function create() {
@@ -50,7 +52,8 @@
         Redirect::to('/match/' . $kohde->id, array('message' => 'Kohde on lisätty tietokantaan!'));
       } else{
         $lajit = Laji::all();
-        View::make('match/new.html', array('errors' => $errors, 'attributes' => $attributes, 'lajit' => $lajit));
+        View::make('match/new.html', array('errors' => $errors, 'attributes' => $attributes, 'lajit' => $lajit,
+        'nimi' => $params['nimi'], 'tyyppi' => $params['tyyppi'], 'laji_id' => $params['laji_id'], 'sulkeutumisaika' => $params['sulkeutumisaika']));
       }
 
     }
@@ -129,7 +132,7 @@
           foreach ($vedot as $veto) {
             $veto->payWin($veto->vedonlyoja_id, $veto->panos * $valinta->kerroin);
           }
-          Redirect::to('/match/' . $kohde->id, array('message' => 'Tulos asetettu ja voittajien tileille hyvitetty lisätty saldoa!'));
+          Redirect::to('/match/' . $kohde->id, array('message' => 'Tulos asetettu ja voittajien tileille lisätty saldoa!'));
         }
         Redirect::to('/match/' . $kohde->id, array('message' => 'Tulos asetettu, ei voittajia!'));
       }

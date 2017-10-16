@@ -1,10 +1,12 @@
 {% extends "base.html" %}
 {% block content %}
   <h1>{{vedonlyoja.nimi}}</h1>
+  {% if user_oneself %}
   <p>
     <a href="{{base_path}}/bettor/deposit" class="btn btn-default">Talleta</a>
-    <a href="{{base_path}}/bettor/{{vedonlyoja.id}}/update" class="btn btn-default">Vaihda salasana</a>
+    <a href="{{base_path}}/bettor/update" class="btn btn-default">Vaihda salasana</a>
   </p>
+  {% endif %}
   <ul>
     <li><strong>Id:</strong> {{vedonlyoja.id}}</li>
     <li><strong>Nimi:</strong> {{vedonlyoja.nimi}}</li>

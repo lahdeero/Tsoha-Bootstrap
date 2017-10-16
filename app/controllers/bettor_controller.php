@@ -13,11 +13,14 @@
       $vedonlyoja = Vedonlyoja::find($id);
       $vedot = Veto::user_bets($id);
 
-      View::make('bettor/show.html', array('vedonlyoja' => $vedonlyoja, 'vedot' => $vedot));
-      //View::make('etusivu.html', array('vedonlyojat' => $vedonlyojat, 'kohteet' => $kohteet));
+      $parameters = array('vedonlyoja' => $vedonlyoja, 'vedot' => $vedot);
+      if ($_SESSION['user'] == $id) {
+        $parameters['user_oneself'] = 1;
+      }
+      View::make('bettor/show.html', $parameters);
     }
 
-    public static function edit($id) {
+    public static function edit() {
       self::check_logged_in();
       $vedonlyoja = Vedonlyoja::find($_SESSION['user']);
 
@@ -35,9 +38,10 @@
       $vedonlyoja = Vedonlyoja::find($_SESSION['user']);
       $errors = array();
 
-
       if (!is_numeric($lisattava_summa) || $lisattava_summa < 1 || $lisattava_summa > 1000) {
         $errors[] = 'Virheellinen summa';
+      } else if ($vedonlyoja->saldo + $lisattava_summa > 100000) {
+        $errors[] = 'Tilin saldo ei voi ylittää tallettamalla yli 100 000!';
       }
 
       if (count($errors) > 0) {

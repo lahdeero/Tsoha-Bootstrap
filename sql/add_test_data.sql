@@ -12,8 +12,8 @@ INSERT INTO Vedonlyoja (nimi, salasana, saldo, rekisteroitymispaiva, yllapitaja)
 INSERT INTO Kohde (nimi, tyyppi, sulkeutumisaika, laji_id) VALUES ('Kuopolan koijaus - Keikkaus OU', '1X2', '2017-09-24T20:00', 1);
 INSERT INTO Kohde (nimi, tyyppi, sulkeutumisaika, laji_id) VALUES ('Pekkalan parhaat - Siippolan veijarit', '1X2', '2017-09-25T21:30', 1);
 INSERT INTO Kohde (nimi, tyyppi, sulkeutumisaika, laji_id) VALUES ('Jukolan jankkaajat - Mellulan melumiehet', '1X2', '2017-09-26T19:00', 1);
-INSERT INTO Kohde (nimi, tyyppi, sulkeutumisaika, laji_id) VALUES ('Vesihiihdon ALMM', 'Voittajaveto', '2017-12-24T22:00', 2);
-INSERT INTO Kohde (nimi, tyyppi, sulkeutumisaika, laji_id) VALUES ('Lumiluistelun MM', 'Voittajaveto', '2017-12-24T22:00', 3);
+INSERT INTO Kohde (nimi, tyyppi, sulkeutumisaika, laji_id) VALUES ('Vesihiihdon ALMM', 'Voittajaveto', '2017-12-25T22:00', 2);
+INSERT INTO Kohde (nimi, tyyppi, sulkeutumisaika, laji_id) VALUES ('Lumiluistelun SM', 'Voittajaveto', '2017-12-24T22:00', 3);
 
 INSERT INTO Valinta(nimi, kerroin, kohde_id) VALUES ('Kuopolan koijaus', 1.8, 1);
 INSERT INTO Valinta(nimi, kerroin, kohde_id) VALUES ('Tasapeli', 3.5, 1);
