@@ -42,13 +42,22 @@ class Veto extends BaseModel {
     return null;
   }
 
-  public static function all() {
+  public static function all($options) {
+
+    if(isset($options['page']) && isset($options['page_size'])) {
+      $page_size = $options['page_size'];
+      $page = $options['page'];
+    }else {
+      $page_size = 10;
+      $page = 1;
+    }
+
     $query = DB::connection()->prepare('SELECT Veto.Id, Veto.kohde_id, Kohde.nimi as kohde_nimi, Panos,
        Valinta.nimi as valinta_nimi, Veto.vedonlyoja_id,  vedonlyoja.nimi as vedonlyoja_nimi
        FROM Veto LEFT JOIN Kohde ON Veto.kohde_id = Kohde.id LEFT JOIN Valinta ON Veto.valinta_id = Valinta.id
-       LEFT JOIN Vedonlyoja ON Veto.vedonlyoja_id = Vedonlyoja.id ORDER BY Veto.id DESC');
+       LEFT JOIN Vedonlyoja ON Veto.vedonlyoja_id = Vedonlyoja.id ORDER BY Veto.id DESC LIMIT :limit OFFSET :offset');
 
-    $query->execute();
+    $query->execute(array('limit' => $page_size, 'offset' => $page_size * ($page - 1)));
 
     $rows = $query->fetchAll();
     $vedot = array();
@@ -66,6 +75,19 @@ class Veto extends BaseModel {
     }
 
     return $vedot;
+  }
+  public static function count() {
+    $query = DB::connection()->prepare('SELECT count(*) as count FROM VETO');
+    $query->execute();
+
+    $rows = $query->fetchAll();
+    if (!$rows) {
+      return 0;
+    }
+    foreach($rows as $row){
+      $count = $row['count'];
+    }
+    return $count;
   }
 
   public function save() {

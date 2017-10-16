@@ -52,7 +52,7 @@
 	});
 
 	$routes->post('/match/:id/complete', function() {
-		MatchController::end();
+		MatchController::end_match();
 	});
 
 	$routes->post('/match/:id/destroy', function($id) {
@@ -81,6 +81,12 @@
 
 	$routes->get('/bettor/:id/update', function($id) {
 		BettorController::edit($id);
+	});
+	$routes->get('/bettor/deposit', function() {
+		BettorController::balance();
+	});
+	$routes->post('/bettor/deposit', function() {
+		BettorController::deposit();
 	});
 
 	$routes->get('/bettor/:id', function($id) {

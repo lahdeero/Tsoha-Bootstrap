@@ -2,16 +2,6 @@
 {% block content %}
   <h1>Lisää kohde tietokantaan</h1>
 
-  {% if errors %}
-    <div class="alert alert-danger">
-      <ul>
-        {% for error in errors %}
-          <li>{{error}}</li>
-        {% endfor %}
-      </ul>
-    </div>
-  {% endif %}
-
   <form method="post" action="{{base_path}}/match">
     <div class="form-group">
       <label>Nimi</label>
@@ -33,7 +23,7 @@
     </div>
 
     <div class="form-group">
-      <label>Sulkeutumisaika (YYYY-DD-MM hh:mm:ss)</label>
+      <label>Sulkeutumisaika (mm/dd/yyyy, hh:mm am/pm)</label>
       <input type="datetime-local" name="sulkeutumisaika" class="form-control" min="2017-06-01T08:30" max="2050-06-30T16:30"
            pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}" required>
     </div>

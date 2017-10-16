@@ -7,7 +7,7 @@ INSERT INTO Laji (nimi) VALUES ('Sauvanheitto');
 INSERT INTO Vedonlyoja (nimi, salasana, saldo, rekisteroitymispaiva, yllapitaja) VALUES ('Eero', 'eero123', 10.2, '2017-09-20', 1);
 INSERT INTO Vedonlyoja (nimi, salasana, saldo, rekisteroitymispaiva) VALUES ('Matti', 'matti123', 15.6, '2017-09-23');
 INSERT INTO Vedonlyoja (nimi, salasana, saldo, rekisteroitymispaiva) VALUES ('Sirkka', 'sirkka123', 100.8, '2017-09-23');
-INSERT INTO Vedonlyoja (nimi, salasana, saldo, rekisteroitymispaiva, yllapitaja) VALUES ('Ohjaaja', 'ohja123', 0.0, '2017-09-29', 1);
+INSERT INTO Vedonlyoja (nimi, salasana, saldo, rekisteroitymispaiva, yllapitaja) VALUES ('Ohjaaja', 'ohja123', 1337, '2017-09-29', 1);
 
 INSERT INTO Kohde (nimi, tyyppi, sulkeutumisaika, laji_id) VALUES ('Kuopolan koijaus - Keikkaus OU', '1X2', '2017-09-24T20:00:00', 1);
 INSERT INTO Kohde (nimi, tyyppi, sulkeutumisaika, laji_id) VALUES ('Pekkalan parhaat - Siippolan veijarit', '1X2', '2017-09-25T21:30:00', 1);

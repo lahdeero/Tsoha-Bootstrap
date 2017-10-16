@@ -2,12 +2,14 @@
   class MatchController extends BaseController{
 
     public static function list(){
-      $kohteet = Kohde::all();
+      $options = self::paging_options(Kohde::count());
+
+      $kohteet = Kohde::all($options);
 
       if(isset($_SESSION['yllapitaja']))  {
-          View::make('match/index.html', array('kohteet' => $kohteet, 'yllapitaja' => $_SESSION['yllapitaja']));
+          View::make('match/index.html', array('kohteet' => $kohteet, 'yllapitaja' => $_SESSION['yllapitaja'], 'pages' => $options['pages'], 'prev_page' => $options['prev_page'], 'next_page' => $options['next_page']));
       }
-      View::make('match/index.html', array('kohteet' => $kohteet));
+      View::make('match/index.html', array('kohteet' => $kohteet, 'pages' => $options['pages'], 'prev_page' => $options['prev_page'], 'next_page' => $options['next_page']));
     }
 
     public static function show($id){
@@ -100,7 +102,7 @@
         View::make('match/complete.html', array('kohde' => $kohde, 'valinnat' => $valinnat));
     }
 
-    public static function end() {
+    public static function end_match() {
       self::check_admin();
       $params = $_POST;
 

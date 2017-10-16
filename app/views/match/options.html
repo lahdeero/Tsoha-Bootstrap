@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
 
-  <h1>{{kohde.nimi}} valinnat</h1>
+  <h1><a href="{{base_path}}/match/{{kohde.id}}">{{kohde.nimi}}</a> valinnat</h1>
 
   <form method="post" action="{{base_path}}/match/{{kohde.id}}/options">
 

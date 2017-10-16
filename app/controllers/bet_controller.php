@@ -2,9 +2,10 @@
   class BetController extends BaseController{
     public static function list(){
       self::check_logged_in();
-      $vedot = Veto::all();
+      $options = self::paging_options(Veto::count());
 
-      View::make('bet/index.html', array('vedot' => $vedot));
+      $vedot = Veto::all($options);
+      View::make('bet/index.html', array('vedot' => $vedot, 'pages' => $options['pages'], 'prev_page' => $options['prev_page'], 'next_page' => $options['next_page']));
     }
 
     public static function show($id){
@@ -22,10 +23,22 @@
     public static function store(){
       self::check_logged_in();
       $params = $_POST;
+      $errors = array();
+      $kohde = Kohde::find($params['kohde_id']);
+      $sulkeutumispaiva = strtotime($kohde->sulkeutumisaika);
+      $nykyhetki = time();
 
       if (!isset($params['valinta_id'])) {
         $errors[] = 'Et voi lyödä kohdetta ilman valintaa!';
-        Redirect::to('/match/' . $params['kohde_id'], array('errors' => $errors));
+      }
+      if ($sulkeutumispaiva < $nykyhetki) {
+      $errors[] = 'Kohde on suljettu!';
+    	// $errors[] = 'nykyhetki: ' . $nykyhetki; // Jätetään nää jos tarvii vielä debugata
+    	// $errors[] =  'sulkeutumishetki: ' . $sulkeutumispaiva;
+      }
+
+      if (count($errors) > 0) {
+	       Redirect::to('/match/' . $params['kohde_id'], array('errors' => $errors));
       }
 
       $attributes = array(

@@ -25,7 +25,7 @@
     }
 
     public static function all() {
-      $query = DB::connection()->prepare('SELECT * FROM Laji');
+      $query = DB::connection()->prepare('SELECT laji.id,laji.nimi,count(kohde.laji_id) FROM Laji LEFT JOIN Kohde ON Kohde.laji_id = Laji.id GROUP BY Laji.id');
       $query->execute();
       $rows = $query->fetchAll();
 
@@ -34,7 +34,8 @@
       foreach($rows as $row){
         $lajit[] = new Laji(array(
           'id' => $row['id'],
-          'nimi' => $row['nimi']
+          'nimi' => $row['nimi'],
+          'kohteita' => $row['count']
         ));
       }
 

@@ -32,4 +32,32 @@
       return null;
     }
 
+    public static function paging_options($total_count) {
+      $page_size = 10;
+      $pages = ceil($total_count / $page_size);
+      $page = 1;
+      $prev_page = 1;
+      $options = array(
+        'page' => 1,
+        'prev_page' => 1,
+        'next_page' => 1,
+        'pages' => $pages,
+        'page_size' => $page_size,
+      );
+
+      if(isset($_GET['page'])) {
+        $page = $_GET['page'];
+        $options['page'] = $page;
+        if ($page > 1) {
+          $options['prev_page'] = $page - 1;
+        }
+        if ($pages > $page) {
+          $options['next_page'] = $page + 1;
+        } else if ($pages == $page) {
+          $options['next_page'] = $page;
+        }
+      }
+      return $options;
+    }
+
   }

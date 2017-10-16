@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block content %}
+  <h1>Lisää saldoa</h1>
+
+  <form method="post" action="{{base_path}}/bettor/deposit">
+
+    <div class="form-group">
+      <label>Talletettava summa (kokonaisluku ja maksimissaan 1000)</label>
+      <input type="number" class="form-control" name="lisattava_saldo">
+    </div>
+
+    <button type="submit" class="btn btn-primary">Talleta</button>
+  </form>
+{% endblock %}

@@ -67,10 +67,15 @@ class Vedonlyoja extends BaseModel {
 
     return $vedonlyojat;
   }
+  public static function deposit($id, $how_much) {
+    $query = DB::connection()->prepare('UPDATE Vedonlyoja SET saldo = saldo + :how_much WHERE id = :id');
+    $query->execute(array('how_much' => $how_much, 'id' => $id));
+  }
   public static function takeMoney($id, $how_much) {
     $query = DB::connection()->prepare('UPDATE Vedonlyoja SET saldo = saldo - :how_much WHERE id = :id');
     $query->execute(array('how_much' => $how_much, 'id' => $id));
   }
+
 
 
 }

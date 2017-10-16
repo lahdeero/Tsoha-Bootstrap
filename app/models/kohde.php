@@ -31,10 +31,16 @@ class Kohde extends BaseModel {
   }
 
 
-  public static function all() {
-    $query = DB::connection()->prepare('SELECT * FROM Kohde ORDER BY sulkeutumisaika DESC');
-
-    $query->execute();
+  public static function all($options) {
+    if(isset($options['page']) && isset($options['page_size'])) {
+      $page_size = $options['page_size'];
+      $page = $options['page'];
+    }else {
+      $page_size = 10;
+      $page = 1;
+    }
+    $query = DB::connection()->prepare('SELECT * FROM Kohde ORDER BY sulkeutumisaika DESC LIMIT :limit OFFSET :offset');
+    $query->execute(array('limit' => $page_size, 'offset' => $page_size * ($page - 1)));
 
     $rows = $query->fetchAll();
     $kohteet = array();
@@ -51,6 +57,19 @@ class Kohde extends BaseModel {
     }
 
     return $kohteet;
+  }
+  public static function count() {
+	  $query = DB::connection()->prepare('SELECT count(*) as count FROM Kohde');
+	  $query->execute();
+
+	  $rows = $query->fetchAll();
+	  if (!$rows) {
+		  return 0;
+	  }
+	  foreach($rows as $row){
+		  $count = $row['count'];
+	  }
+	  return $count;
   }
 
   public static function list_by_sport($laji_id) {
