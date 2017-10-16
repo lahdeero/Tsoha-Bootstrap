@@ -13,6 +13,7 @@
     <thead>
       <tr>
         <th>Kohde</th>
+        <th>Laji</th>
         <th>Kohteen tyyppi</th>
         <th>Sulkeutumisaika</th>
       </tr>
@@ -22,6 +23,7 @@
       {% for kohde in kohteet %}
         <tr>
           <td><a href="{{base_path}}/match/{{kohde.id}}">{{kohde.nimi}}</td>
+          <td><a href="{{base_path}}/sport/{{kohde.laji_id}}">{{kohde.laji_nimi}}</td>
           <td>{{kohde.tyyppi}}</td>
           <td>{{kohde.sulkeutumisaika}}</td>
         </tr>

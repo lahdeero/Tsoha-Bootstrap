@@ -29,8 +29,6 @@ class Kohde extends BaseModel {
 
     return null;
   }
-
-
   public static function all($options) {
     if(isset($options['page']) && isset($options['page_size'])) {
       $page_size = $options['page_size'];
@@ -94,7 +92,8 @@ class Kohde extends BaseModel {
   }
 
   public static function newest($howmany) {
-    $query = DB::connection()->prepare('SELECT * FROM Kohde ORDER BY id DESC LIMIT :howmany');
+    $query = DB::connection()->prepare('SELECT kohde.id,kohde.nimi,kohde.tyyppi,kohde.sulkeutumisaika,kohde.tulos,kohde.laji_id,laji.nimi as laji_nimi
+      FROM Kohde LEFT JOIN Laji ON Kohde.laji_id = Laji.id ORDER BY id DESC LIMIT :howmany');
     $query->execute(array('howmany' => $howmany));
 
     $rows = $query->fetchAll();
@@ -106,7 +105,9 @@ class Kohde extends BaseModel {
         'nimi' => $row['nimi'],
         'tyyppi' => $row['tyyppi'],
         'sulkeutumisaika' => $row['sulkeutumisaika'],
-        'tulos' => $row['tulos']
+        'tulos' => $row['tulos'],
+        'laji_id' => $row['laji_id'],
+        'laji_nimi' => $row['laji_nimi']
       ));
     }
 

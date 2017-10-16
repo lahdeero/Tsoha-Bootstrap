@@ -43,7 +43,7 @@ CREATE TABLE Veto(
 
 CREATE TABLE Ehdotus(
 	id SERIAL PRIMARY KEY,
-	nimi varchar(20) NOT NULL,
+	nimi varchar(40) NOT NULL,
 	selvennys varchar(500),
 	laji_id integer,
 	FOREIGN KEY(laji_id) REFERENCES Laji(id)

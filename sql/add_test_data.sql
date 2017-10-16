@@ -9,10 +9,11 @@ INSERT INTO Vedonlyoja (nimi, salasana, saldo, rekisteroitymispaiva) VALUES ('Ma
 INSERT INTO Vedonlyoja (nimi, salasana, saldo, rekisteroitymispaiva) VALUES ('Sirkka', 'sirkka123', 100.8, '2017-09-23');
 INSERT INTO Vedonlyoja (nimi, salasana, saldo, rekisteroitymispaiva, yllapitaja) VALUES ('Ohjaaja', 'ohja123', 1337, '2017-09-29', 1);
 
-INSERT INTO Kohde (nimi, tyyppi, sulkeutumisaika, laji_id) VALUES ('Kuopolan koijaus - Keikkaus OU', '1X2', '2017-09-24T20:00:00', 1);
-INSERT INTO Kohde (nimi, tyyppi, sulkeutumisaika, laji_id) VALUES ('Pekkalan parhaat - Siippolan veijarit', '1X2', '2017-09-25T21:30:00', 1);
-INSERT INTO Kohde (nimi, tyyppi, sulkeutumisaika, laji_id) VALUES ('Jukolan jankkaajat - Mellulan melumiehet', '1X2', '2017-09-26T19:00:00', 1);
-INSERT INTO Kohde (nimi, tyyppi, sulkeutumisaika, laji_id) VALUES ('Vesihiihdon ALMM', 'Voittajaveto', '2017-12-24T19:00:00', 2);
+INSERT INTO Kohde (nimi, tyyppi, sulkeutumisaika, laji_id) VALUES ('Kuopolan koijaus - Keikkaus OU', '1X2', '2017-09-24T20:00', 1);
+INSERT INTO Kohde (nimi, tyyppi, sulkeutumisaika, laji_id) VALUES ('Pekkalan parhaat - Siippolan veijarit', '1X2', '2017-09-25T21:30', 1);
+INSERT INTO Kohde (nimi, tyyppi, sulkeutumisaika, laji_id) VALUES ('Jukolan jankkaajat - Mellulan melumiehet', '1X2', '2017-09-26T19:00', 1);
+INSERT INTO Kohde (nimi, tyyppi, sulkeutumisaika, laji_id) VALUES ('Vesihiihdon ALMM', 'Voittajaveto', '2017-12-24T22:00', 2);
+INSERT INTO Kohde (nimi, tyyppi, sulkeutumisaika, laji_id) VALUES ('Lumiluistelun MM', 'Voittajaveto', '2017-12-24T22:00', 3);
 
 INSERT INTO Valinta(nimi, kerroin, kohde_id) VALUES ('Kuopolan koijaus', 1.8, 1);
 INSERT INTO Valinta(nimi, kerroin, kohde_id) VALUES ('Tasapeli', 3.5, 1);
@@ -35,8 +36,18 @@ INSERT INTO Valinta(nimi, kerroin, kohde_id) VALUES ('Minni', 5.7, 4);
 INSERT INTO Valinta(nimi, kerroin, kohde_id) VALUES ('Tulppu', 6.9, 4);
 INSERT INTO Valinta(nimi, kerroin, kohde_id) VALUES ('Kroisos', 7.7, 4);
 
+INSERT INTO Valinta(nimi, kerroin, kohde_id) VALUES ('Kiiraa Korpee', 1.7, 5);
+INSERT INTO Valinta(nimi, kerroin, kohde_id) VALUES ('Petrii Kokkoon', 2.5, 5);
+INSERT INTO Valinta(nimi, kerroin, kohde_id) VALUES ('Elinaa Ketuttaa', 3.3, 5);
+INSERT INTO Valinta(nimi, kerroin, kohde_id) VALUES ('Laura Lepäilee', 4.1, 5);
+INSERT INTO Valinta(nimi, kerroin, kohde_id) VALUES ('Kristiina WYSIWYG', 4.4, 5);
+INSERT INTO Valinta(nimi, kerroin, kohde_id) VALUES ('Marcus Nikkaroi', 5.7, 5);
+INSERT INTO Valinta(nimi, kerroin, kohde_id) VALUES ('Belaa Pappina', 6.9, 5);
+INSERT INTO Valinta(nimi, kerroin, kohde_id) VALUES ('Jussivillelle Parta', 7.7, 5);
+
 INSERT INTO Veto (panos, kohde_id, vedonlyoja_id, valinta_id) VALUES (10, 1, 1, 1);
 INSERT INTO Veto (panos, kohde_id, vedonlyoja_id, valinta_id) VALUES (17, 2, 2, 2);
 INSERT INTO Veto (panos, kohde_id, vedonlyoja_id, valinta_id) VALUES (12, 3, 3, 2);
 
 INSERT INTO Ehdotus (nimi, selvennys) VALUES ('Sulkavan sou-ut', 'Niin sellanen kisa että kuka soutaapi pisimpään, ois nii kiva saaha semmottii');
+INSERT INTO Ehdotus (nimi, selvennys) VALUES ('Sivuston ehrotustoiminto', 'Niin semmone veikkaus että millonkoha ehotustoiminto toimis');
