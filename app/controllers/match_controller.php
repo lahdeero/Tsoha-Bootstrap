@@ -18,7 +18,7 @@
       $valinnat = Valinta::find($id);
 
       $parametrit = array('kohde' => $kohde, 'valinnat' => $valinnat);
-      if($_SESSION['yllapitaja'] == 1)  {
+      if(isset($_SESSION['user']) && $_SESSION['yllapitaja'] == 1)  {
           $parametrit['yllapitaja'] = 1;
       }
       View::make('match/show.html', $parametrit);
