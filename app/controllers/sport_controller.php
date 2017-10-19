@@ -40,7 +40,7 @@ class SportController extends BaseController{
       $laji->save();
       Redirect::to('/sport', array('message' => 'Laji lisätty tietokantaan!'));
     } else {
-      Redirect::to('/sport/new', array('errors' => $errors));
+      Redirect::to('/sport/new', array('errors' => $errors, 'nimi' => $params['nimi']));
     }
   }
 
