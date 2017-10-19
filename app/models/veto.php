@@ -11,6 +11,9 @@ class Veto extends BaseModel {
   }
 
   public static function find($id){
+    if (!isset($id) || $id == 0) {
+      return;
+    }
     $query = DB::connection()->prepare('SELECT veto.id, veto.panos, veto.palautus,
       kohde.nimi as kohde, kohde.tyyppi as kohde_tyyppi, veto.vedonlyoja_id, veto.kohde_id, veto.vedonlyoja_id, vedonlyoja.nimi as vedonlyoja_nimi,
       valinta.nimi as valinta, valinta.kerroin as kerroin, veto.panos*valinta.kerroin as mahdollinen_voitto FROM Veto
@@ -129,7 +132,7 @@ class Veto extends BaseModel {
 
   public static function user_bets($id) {
     $query = DB::connection()->prepare('SELECT Veto.id, kohde.id as kohde_id, kohde.nimi as kohde_nimi, Valinta.nimi as valinta_nimi, veto.panos, veto.palautus FROM Veto
-      LEFT JOIN Kohde ON Veto.kohde_id = Kohde.id LEFT JOIN Valinta ON Veto.valinta_id = Valinta.id WHERE vedonlyoja_id = :id');
+      LEFT JOIN Kohde ON Veto.kohde_id = Kohde.id LEFT JOIN Valinta ON Veto.valinta_id = Valinta.id WHERE vedonlyoja_id = :id ORDER BY Veto.id DESC');
     $query->execute(array('id' => $id));
 
     $rows = $query->fetchAll();
@@ -155,7 +158,7 @@ class Veto extends BaseModel {
     $query = DB::connection()->prepare('UPDATE Veto SET palautus = 0 WHERE kohde_id = :kohde_id');
     $query->execute(array('kohde_id' => $kohde_id));
   }
-  public static function winning_bets($kohde_id, $kerroin, $tulos) {
+  public static function winning_bets($kohde_id, $tulos) {
     $query = DB::connection()->prepare('SELECT id,panos,vedonlyoja_id FROM Veto WHERE kohde_id = :kohde_id AND valinta_id = :tulos');
     $query->execute(array('kohde_id' => $kohde_id, 'tulos' => $tulos));
     $rows = $query->fetchAll();
@@ -173,9 +176,12 @@ class Veto extends BaseModel {
     }
     return null;
   }
-  public static function payWin($id, $how_much) {
-    $query = DB::connection()->prepare('UPDATE Vedonlyoja SET saldo = saldo + :how_much WHERE id = :id');
+  public static function payWin($id, $bettor_id, $how_much) {
+    $query = DB::connection()->prepare('UPDATE Veto SET palautus = panos + :how_much WHERE id = :id');
     $query->execute(array('how_much' => $how_much, 'id' => $id));
+
+    $query = DB::connection()->prepare('UPDATE Vedonlyoja SET saldo = saldo + :how_much WHERE id = :bettor_id');
+    $query->execute(array('how_much' => $how_much, 'bettor_id' => $bettor_id));
   }
 
 }

@@ -26,10 +26,11 @@
     }
 
     public static function check_admin(){
-      if(!isset($_SESSION['yllapitaja'])){
-        return 1;
+      self::check_logged_in();
+      $user = Vedonlyoja::find($_SESSION['user']);
+      if ($user->yllapitaja == 0) {
+        Redirect::to('/login', array('message' => 'Toiminta vaatii ylläpito-oikeudet!'));
       }
-      return null;
     }
 
     public static function paging_options($total_count) {

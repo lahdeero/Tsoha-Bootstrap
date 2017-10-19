@@ -8,7 +8,7 @@ CREATE TABLE Kohde(
 	nimi varchar(70),
 	tyyppi varchar(25),
 	sulkeutumisaika varchar(50),
-	tulos varchar(8),
+	tulos integer,
 	laji_id integer REFERENCES Laji(id)
 );
 
@@ -47,4 +47,4 @@ CREATE TABLE Ehdotus(
 	selvennys varchar(505),
 	laji_id integer,
 	FOREIGN KEY(laji_id) REFERENCES Laji(id)
-)
+);

@@ -18,7 +18,7 @@
       $valinnat = Valinta::find($id);
       $tulos = ' ';
       if (isset($kohde->tulos)) {
-        $tulos_valintana = Valinta::find_option($kohde->id);
+        $tulos_valintana = Valinta::find_option($kohde->tulos);
         $tulos = $tulos_valintana->nimi;
       }
 
@@ -30,13 +30,14 @@
     }
 
     public static function create() {
-      self::check_logged_in();
+      self::check_admin();
       $lajit = Laji::all();
 
       View::make('match/new.html', array('lajit' => $lajit));
     }
 
     public static function store(){
+      self::check_admin();
       // POST-pyynnön muuttujat sijaitsevat $_POST nimisessä assosiaatiolistassa
       $params = $_POST;
       // Alustetaan uusi Kohde-luokan olion käyttäjän syöttämillä arvoilla
@@ -63,20 +64,20 @@
 
     }
     public static function edit($id) {
-      self::check_logged_in();
+      self::check_admin();
       $kohde = Kohde::find($id);
       View::make('match/edit.html', array('kohde' => $kohde));
     }
 
     public static function options($id) {
-        self::check_logged_in();
+        self::check_admin();
         $kohde = Kohde::find($id);
         $valinnat = Valinta::find($id);
         View::make('match/options.html', array('kohde' => $kohde, 'valinnat' => $valinnat));
     }
 
     public static function update($id) {
-      self::check_logged_in();
+      self::check_admin();
       $params = $_POST;
 
       $attributes = array(
@@ -98,17 +99,17 @@
       }
     }
     public static function destroy($id) {
-        self::check_logged_in();
+        self::check_admin();
         $kohde = new Kohde(array('id' => $id));
         $kohde->destroy($id);
         Redirect::to('/match', array('message' => 'Kohde on poistettu tietokannasta!'));
     }
     public static function complete($id) {
-        self::check_logged_in();
+        self::check_admin();
         $kohde = Kohde::find($id);
         $valinnat = Valinta::find($id);
-        if (isset($kohde->tulos)) {
-          Redirect::to('/match/' . $kohde->id, array('message' => 'Kohteella on jo tulos!'));
+        if (count($valinnat) == 0) {
+          Redirect::to('/match/' . $kohde->id, array('message' => 'Kohde tarvitsee ensin valintoja!'));
         }
         View::make('match/complete.html', array('kohde' => $kohde, 'valinnat' => $valinnat));
     }
@@ -135,11 +136,11 @@
         $valinta = Valinta::find_option($kohde->tulos);
         Veto::update($kohde->id, $valinta->kerroin, $kohde->tulos);
         Veto::all_bets_in_match($kohde->id);
-        $vedot = Veto::winning_bets($kohde->id, $valinta->kerroin, $kohde->tulos);
+        $vedot = Veto::winning_bets($kohde->id, $kohde->tulos);
 
         if ($vedot) {
           foreach ($vedot as $veto) {
-            $veto->payWin($veto->vedonlyoja_id, $veto->panos * $valinta->kerroin);
+            $veto->payWin($veto->id, $veto->vedonlyoja_id, $veto->panos * $valinta->kerroin);
           }
           Redirect::to('/match/' . $kohde->id, array('message' => 'Tulos asetettu ja voittajien tileille lisätty saldoa!'));
         }

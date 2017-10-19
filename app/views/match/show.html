@@ -7,9 +7,11 @@
       <form method="post" action="{{base_path}}/match/{{kohde.id}}/destroy" class="destroy-form" data-confirm="Oletko varma että haluat poistaa kohteen?">
         <button type="submit" class="btn btn-danger">Poista</button>
       </form>
-      <a href="{{base_path}}/match/{{kohde.id}}/edit" class="btn btn-default">Muokkaa kohdetta</a>
-      <a href="{{base_path}}/match/{{kohde.id}}/options" class="btn btn-default">Muokkaa valintoja</a>
-      <a href="{{base_path}}/match/{{kohde.id}}/complete" class="btn btn-default">Aseta tulos</a>
+      {% if not kohde.tulos %}
+        <a href="{{base_path}}/match/{{kohde.id}}/edit" class="btn btn-default">Muokkaa kohdetta</a>
+        <a href="{{base_path}}/match/{{kohde.id}}/options" class="btn btn-default">Muokkaa valintoja</a>
+        <a href="{{base_path}}/match/{{kohde.id}}/complete" class="btn btn-default">Aseta tulos</a>
+      {% endif %}
     </p>
   {% endif %}
 
@@ -23,31 +25,33 @@
   </ul>
   <br>
   {% if user_logged_in %}
-  <p>
-    <form method="post" action="{{base_path}}/bet" id="asetaVeto">
-      <div class="form-group">
-        <label>Valinta</label>
-        <select name="valinta_id" form="asetaVeto">
-          {% for valinta in valinnat %}
-            <option value="{{valinta.id}}">{{valinta.nimi}} ({{valinta.kerroin}})</option>
-          {% endfor %}
-        </select>
-      </div>
+  {% if not kohde.tulos %}
+    <p>
+      <form method="post" action="{{base_path}}/bet" id="asetaVeto">
+        <div class="form-group">
+          <label>Valinta</label>
+          <select name="valinta_id" form="asetaVeto">
+            {% for valinta in valinnat %}
+              <option value="{{valinta.id}}">{{valinta.nimi}} ({{valinta.kerroin}})</option>
+            {% endfor %}
+          </select>
+        </div>
 
-      <div class="form-group">
-        <label>Panos</label>
-        <input type="number" step="0.1" name="panos" maxlength="5" size="5" class="form-control" >
-      </div>
+        <div class="form-group">
+          <label>Panos</label>
+          <input type="number" step="0.1" name="panos" maxlength="5" size="5" class="form-control" >
+        </div>
 
-      <div class="form-group">
-        <input type="hidden" name="kohde_id" value="{{kohde.id}}" class="form-control" >
-      </div>
+        <div class="form-group">
+          <input type="hidden" name="kohde_id" value="{{kohde.id}}" class="form-control" >
+        </div>
 
-      <div class="form-group">
-        <button type="submit" class="btn btn-primary">Aseta veto</button>
-      </div>
-    </form>
-  </p>
-    {% endif %}
+        <div class="form-group">
+          <button type="submit" class="btn btn-primary">Aseta veto</button>
+        </div>
+      </form>
+    </p>
+  {% endif %}
+  {% endif %}
 
 {% endblock %}

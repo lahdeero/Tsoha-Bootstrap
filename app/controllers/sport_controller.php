@@ -20,11 +20,13 @@ class SportController extends BaseController{
   }
 
   public static function add() {
+    self::check_admin();
     $lajit = Laji::all();
     View::make('sport/new.html', array('lajit' => $lajit));
   }
 
   public static function store() {
+    self::check_admin();
     $params = $_POST;
 
     $laji = new Laji(array ('nimi' => $params['nimi']));

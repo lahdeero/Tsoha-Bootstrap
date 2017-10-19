@@ -46,8 +46,8 @@ INSERT INTO Valinta(nimi, kerroin, kohde_id) VALUES ('Belaa Pappina', 6.9, 5);
 INSERT INTO Valinta(nimi, kerroin, kohde_id) VALUES ('Jussivillelle Parta', 7.7, 5);
 
 INSERT INTO Veto (panos, kohde_id, vedonlyoja_id, valinta_id) VALUES (10, 1, 1, 1);
-INSERT INTO Veto (panos, kohde_id, vedonlyoja_id, valinta_id) VALUES (17, 2, 2, 2);
-INSERT INTO Veto (panos, kohde_id, vedonlyoja_id, valinta_id) VALUES (12, 3, 3, 2);
+INSERT INTO Veto (panos, kohde_id, vedonlyoja_id, valinta_id) VALUES (17, 2, 2, 5);
+INSERT INTO Veto (panos, kohde_id, vedonlyoja_id, valinta_id) VALUES (12, 3, 3, 8);
 
 INSERT INTO Ehdotus (nimi, selvennys) VALUES ('Sulkavan sou-ut', 'Niin sellanen kisa että kuka soutaapi pisimpään, ois nii kiva saaha semmottii');
 INSERT INTO Ehdotus (nimi, selvennys) VALUES ('Sivuston ehrotustoiminto', 'Niin semmone veikkaus että millonkoha ehotustoiminto toimis');
