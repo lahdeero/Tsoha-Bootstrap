@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block content %}
+  <h1>Lisää laji</h1>
+
+  <form method="post" action="{{base_path}}/sport/new">
+
+    <div class="form-group">
+      <label>Lajin nimi</label>
+      <input type="text" class="form-control" name="nimi" value="{{attributes.nimi}}">
+    </div>
+
+    <button type="submit" class="btn btn-primary">Lisää</button>
+  </form>
+{% endblock %}

@@ -7,7 +7,7 @@
       $kohteet = Kohde::all($options);
       $parametrit = array('kohteet' => $kohteet, 'pages' => $options['pages'], 'prev_page' => $options['prev_page'], 'next_page' => $options['next_page']);
 
-      if($_SESSION['yllapitaja'] == 1)  {
+      if(isset($_SESSION['user']) && $_SESSION['yllapitaja'] == 1)  {
         $parametrit['yllapitaja'] = 1;
       }
       View::make('match/index.html', $parametrit);
@@ -16,8 +16,13 @@
     public static function show($id){
       $kohde = Kohde::find($id);
       $valinnat = Valinta::find($id);
+      $tulos = ' ';
+      if (isset($kohde->tulos)) {
+        $tulos_valintana = Valinta::find_option($kohde->id);
+        $tulos = $tulos_valintana->nimi;
+      }
 
-      $parametrit = array('kohde' => $kohde, 'valinnat' => $valinnat);
+      $parametrit = array('kohde' => $kohde, 'valinnat' => $valinnat, 'tulos' => $tulos);
       if(isset($_SESSION['user']) && $_SESSION['yllapitaja'] == 1)  {
           $parametrit['yllapitaja'] = 1;
       }
@@ -102,6 +107,9 @@
         self::check_logged_in();
         $kohde = Kohde::find($id);
         $valinnat = Valinta::find($id);
+        if (isset($kohde->tulos)) {
+          Redirect::to('/match/' . $kohde->id, array('message' => 'Kohteella on jo tulos!'));
+        }
         View::make('match/complete.html', array('kohde' => $kohde, 'valinnat' => $valinnat));
     }
 
@@ -123,6 +131,7 @@
       if (count($errors) > 0) {
         View::make('kohde/complete.html', array('errors' => $errors, 'attributes' => $attributes));
       } else {
+        $kohde->update($kohde->id);
         $valinta = Valinta::find_option($kohde->tulos);
         Veto::update($kohde->id, $valinta->kerroin, $kohde->tulos);
         Veto::all_bets_in_match($kohde->id);

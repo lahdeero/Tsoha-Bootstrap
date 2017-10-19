@@ -1,7 +1,4 @@
 <?php
-
-
-
 	$routes->get('/', function() {
 		FrontPageController::index();
 	});
@@ -101,6 +98,14 @@
 	  SportController::index();
 	});
 
+	$routes->get('/sport/new', function() {
+		SportController::add();
+	});
+
+	$routes->post('/sport/new', function() {
+		SportController::store();
+	});
+
 	$routes->get('/sport/:id', function($id) {
 	  SportController::list($id);
 	});
@@ -117,12 +122,4 @@
 	});
 	$routes->post('/suggestion/new', function() {
 		SuggestionController::store();
-	});
-
-	$routes->get('/hiekkalaatikko', function() {
-		HelloWorldController::sandbox();
-	});
-
-	$routes->get('/hello', function() {
-		HelloWorldController::hello();
 	});

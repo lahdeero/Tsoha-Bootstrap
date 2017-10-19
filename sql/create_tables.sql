@@ -1,6 +1,6 @@
 CREATE TABLE Laji(
 	id SERIAL PRIMARY KEY,
-	nimi varchar(50) UNIQUE
+	nimi varchar(70) UNIQUE
 );
 
 CREATE TABLE Kohde(
