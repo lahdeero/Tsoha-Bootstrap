@@ -38,10 +38,10 @@
       $vedonlyoja = Vedonlyoja::find($_SESSION['user']);
       $errors = array();
 
-      if (!is_numeric($lisattava_summa) || $lisattava_summa < 1 || $lisattava_summa > 1000) {
-        $errors[] = 'Virheellinen summa';
-      } else if ($vedonlyoja->saldo + $lisattava_summa > 100000) {
-        $errors[] = 'Tilin saldo ei voi ylittää tallettamalla yli 100 000!';
+      if (!is_numeric($lisattava_summa) || $lisattava_summa < 1 || $lisattava_summa > 10000) {
+        $errors[] = 'Virheellinen summa, aseta summaksi 1-100!';
+      } else if ($vedonlyoja->saldo + $lisattava_summa > 1000) {
+        $errors[] = 'Tilin saldo ei voi ylittää tallettamalla yli 1000!';
       }
 
       if (count($errors) > 0) {

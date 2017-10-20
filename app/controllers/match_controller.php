@@ -15,12 +15,17 @@
 
     public static function show($id){
       $kohde = Kohde::find($id);
+      $kellonaika = $kohde->sulkeutumisaika;
+      $uusiaika = date("H:i d-m-Y e", strtotime($kellonaika));
+      $kohde->sulkeutumisaika = $uusiaika;
+
       $valinnat = Valinta::find($id);
       $tulos = ' ';
       if (isset($kohde->tulos)) {
         $tulos_valintana = Valinta::find_option($kohde->tulos);
         $tulos = $tulos_valintana->nimi;
       }
+
 
       $parametrit = array('kohde' => $kohde, 'valinnat' => $valinnat, 'tulos' => $tulos);
       if(isset($_SESSION['user']) && $_SESSION['yllapitaja'] == 1)  {

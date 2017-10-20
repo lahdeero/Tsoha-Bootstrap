@@ -14,6 +14,15 @@
       <input type="textarea" class="form-control" name="selvennys" value="{{attributes.selvennys}}">
     </div>
 
+    <div class="form-group">
+      <label>Laji</label>
+      <select name="laji_id">
+        {% for laji in lajit %}
+          <option value="{{laji.id}}">{{laji.nimi}}</option>
+        {% endfor %}
+      </select>
+    </div>
+
     <button type="submit" class="btn btn-primary">Talleta</button>
   </form>
 {% endblock %}

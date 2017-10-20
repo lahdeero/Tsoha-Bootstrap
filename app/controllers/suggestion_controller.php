@@ -9,14 +9,19 @@ class SuggestionController extends BaseController{
     View::make('suggestion/index.html', array('ehdotukset' => $ehdotukset));
   }
   public static function new() {
-    View::make('suggestion/new.html');
+    self::check_logged_in();
+    $lajit = Laji::all();
+    View::make('suggestion/new.html', array('lajit' => $lajit));
   }
   public static function store() {
+    self::check_logged_in();
     $params = $_POST;
 
     $attributes = array(
       'nimi' => $params['nimi'],
-      'selvennys' => $params['selvennys']
+      'selvennys' => $params['selvennys'],
+      'laji_id' => $params['laji_id'],
+      'vedonlyoja_id' => $_SESSION['user']
     );
 
     $ehdotus = new Ehdotus($attributes);

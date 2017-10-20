@@ -46,5 +46,7 @@ CREATE TABLE Ehdotus(
 	nimi varchar(70) NOT NULL,
 	selvennys varchar(505),
 	laji_id integer,
-	FOREIGN KEY(laji_id) REFERENCES Laji(id)
+	FOREIGN KEY(laji_id) REFERENCES Laji(id),
+	vedonlyoja_id integer REFERENCES Vedonlyoja(id)
+
 );

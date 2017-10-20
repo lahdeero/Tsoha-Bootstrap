@@ -12,7 +12,7 @@ class Valinta extends BaseModel {
   HUOM!!! Palauttaa kohteen valinnat ei valintaa yksittäisen id:n perusteella!!!!
   */
   public static function find($kohde_id) {
-    $query = DB::connection()->prepare('SELECT * FROM Valinta WHERE kohde_id = :kohde_id');
+    $query = DB::connection()->prepare('SELECT * FROM Valinta WHERE kohde_id = :kohde_id ORDER BY kerroin ASC');
     $query->execute(array('kohde_id' => $kohde_id));
 
     $rows = $query->fetchAll();
@@ -29,6 +29,9 @@ class Valinta extends BaseModel {
 
     return $valinnat;
   }
+  /**
+  Toimii kuin normaali find($id)
+  */
   public static function find_option($id) {
       $query = DB::connection()->prepare('SELECT * FROM Valinta WHERE id = :id LIMIT 1');
       $query->execute(array('id' => $id));

@@ -7,18 +7,20 @@
   <table class="table table-striped table-bordered">
     <thead>
       <tr>
-        <th>Id</th>
-        <th>Nimi</th>
+        <th>Ehdotus</th>
+        <th>Laji</th>
         <th>Selvennys</th>
+        <th>Ehdottaja</th>
       </tr>
     </thead>
 
     <tbody>
       {% for ehdotus in ehdotukset %}
         <tr>
-          <td>{{ehdotus.id}}</td>
           <td>{{ehdotus.nimi}}</td>
+          <td><a href="{{base_path}}/sport/{{ehdotus.laji_id}}">{{ehdotus.laji_nimi}}</a></td>
           <td>{{ehdotus.selvennys}}</td>
+          <td><a href="{{base_path}}/bettor/{{ehdotus.vedonlyoja_id}}">{{ehdotus.vedonlyoja_nimi}}</a></td>
         </tr>
       {% endfor %}
     </tbody>
